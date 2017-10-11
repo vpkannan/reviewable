@@ -19,20 +19,25 @@ import com.vignesh.reviewable.service.ProductService;
  */
 
 @RestController
-@RequestMapping("projects")
+@RequestMapping("products")
 public class ProductController {
 
 	@Autowired
-	private ProductService projectService;
+	private ProductService productService;
 
-	public ProductController(ProductService projectService) {
-		this.projectService = projectService;
+	public ProductController(ProductService productService) {
+		this.productService = productService;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Product> getAllProjects() {
-		// TODO: call project service
+	public List<Product> getAllProducts() {
+		// TODO: call product service
 		return null;
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public Product createProduct(Product product) {
+		return productService.createProduct(product);
 	}
 
 }

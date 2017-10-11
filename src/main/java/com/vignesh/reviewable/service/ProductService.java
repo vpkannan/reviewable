@@ -6,9 +6,9 @@ import com.vignesh.reviewable.domain.Product;
 
 public interface ProductService {
 
-	public List<Product> getAllProjects();
+	public List<Product> getAllProducts();
 
-	public Product getProjectById(long id);
+	public Product getProductById(long id);
 
-	public Product createProject(Product project);
+	public Product createProduct(Product product);
 }

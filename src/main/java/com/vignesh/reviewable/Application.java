@@ -2,20 +2,31 @@ package com.vignesh.reviewable;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@RestController
 public class Application {
 
-    @RequestMapping("/")
-    public String home() {
-        return "Hello Docker World";
-    }
+	// protected Application(DataSource dataSource, JpaProperties properties,
+	// ObjectProvider<JtaTransactionManager> jtaTransactionManager,
+	// ObjectProvider<TransactionManagerCustomizers> transactionManagerCustomizers)
+	// {
+	// super(dataSource, properties, jtaTransactionManager,
+	// transactionManagerCustomizers);
+	// }
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
+
+	// @Override
+	// protected AbstractJpaVendorAdapter createJpaVendorAdapter() {
+	// return new HibernateJpaVendorAdapter();
+	// }
+	//
+	// @Override
+	// protected Map<String, Object> getVendorProperties() {
+	// return Collections.singletonMap("hibernate.dialect",
+	// "org.hibernate.dialect.MongoDBDialect");
+	// }
 
 }

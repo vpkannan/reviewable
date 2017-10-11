@@ -17,7 +17,7 @@ import com.vignesh.reviewable.domain.Review;
 @Component
 public interface ReviewService {
 
-	public List<Review> getAllReviews(long projectId);
+	public List<Review> getAllReviews(long productId);
 
 	public Review getReviewById(long id);
 

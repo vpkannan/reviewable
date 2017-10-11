@@ -2,8 +2,18 @@ package com.vignesh.reviewable.domain;
 
 import java.time.OffsetDateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@Entity
 public class Review {
 
+	@Id
+	@GeneratedValue
 	private long id;
 	private int rating;
 	private String reviewTitle;

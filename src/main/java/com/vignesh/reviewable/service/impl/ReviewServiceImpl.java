@@ -11,7 +11,7 @@ import com.vignesh.reviewable.service.ReviewService;
 public class ReviewServiceImpl implements ReviewService {
 
 	@Override
-	public List<Review> getAllReviews(long projectId) {
+	public List<Review> getAllReviews(long productId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

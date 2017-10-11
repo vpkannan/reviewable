@@ -3,7 +3,8 @@
  */
 package com.vignesh.reviewable.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Component;
 
 import com.vignesh.reviewable.domain.Product;
 
@@ -11,6 +12,7 @@ import com.vignesh.reviewable.domain.Product;
  * @author Vignesh
  *
  */
-public interface ProductRepository extends JpaRepository<Product, Long> {
+@Component
+public interface ProductRepository extends MongoRepository<Product, Long> {
 
 }
