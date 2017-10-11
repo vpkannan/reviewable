@@ -23,7 +23,7 @@ import com.vignesh.reviewable.service.ReviewService;
 public class ReviewController {
 
 	@Autowired
-	ReviewService reviewService;
+	private ReviewService reviewService;
 
 	public ReviewController(ReviewService reviewService) {
 		this.reviewService = reviewService;
