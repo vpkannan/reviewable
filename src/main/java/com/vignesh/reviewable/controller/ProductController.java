@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vignesh.reviewable.domain.Project;
-import com.vignesh.reviewable.service.ProjectService;
+import com.vignesh.reviewable.domain.Product;
+import com.vignesh.reviewable.service.ProductService;
 
 /**
  * @author Vignesh
@@ -20,17 +20,17 @@ import com.vignesh.reviewable.service.ProjectService;
 
 @RestController
 @RequestMapping("projects")
-public class ProjectController {
+public class ProductController {
 
 	@Autowired
-	private ProjectService projectService;
+	private ProductService projectService;
 
-	public ProjectController(ProjectService projectService) {
+	public ProductController(ProductService projectService) {
 		this.projectService = projectService;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Project> getAllProjects() {
+	public List<Product> getAllProjects() {
 		// TODO: call project service
 		return null;
 	}

@@ -2,7 +2,7 @@ package com.vignesh.reviewable.domain;
 
 import java.util.List;
 
-public class Project {
+public class Product {
 
 	private long id;
 	private long name;
@@ -14,7 +14,7 @@ public class Project {
 	private int fourStar;
 	private int fiveStar;
 
-	public Project(long id, long name, double averageRating, List<Review> reviews, int oneStar, int twoStar,
+	public Product(long id, long name, double averageRating, List<Review> reviews, int oneStar, int twoStar,
 			int threeStar, int fourStar, int fiveStar) {
 		super();
 		this.id = id;
