@@ -1,0 +1,11 @@
+version: '2'
+services:
+  reviewable:
+    image: com.vignesh.reviewable/reviewable
+    build:
+      context: build/docker
+    #entrypoint: java -jar reviewable.jar
+    ports:
+    - 9001:8080
+    
+    
