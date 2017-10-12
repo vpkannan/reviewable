@@ -6,7 +6,6 @@ node('master') {
 			sh './gradlew clean build'
 			
 		stage 'Build Docker Image'
-			//sh './gradlew buildDocker'
 			app = dokcer.build("vpkannan/reviewable")
 			
 		stage 'Archive Reports'
@@ -18,8 +17,7 @@ node('master') {
 			println "Current build result: " + currentBuild?.result
 			if((!currentBuild?.result || currentBuild?.result == 'SUCCESS') && branches.contains(env.BRANCH_NAME)) {
 				 docker.withRegistry(registryUrl, "docker-hub-credentials") {
-				 	println 'Publishing image to docker repository: ' + registryUrl
-				 	//sh './gradlew publishImage' 
+				 	println 'Publishing image to docker repository: ' + registryUrl 
 					app.push("${env.BUILD_NUMBER}")
 					app.push("latest")
 				 }
@@ -27,6 +25,7 @@ node('master') {
 				println 'Skipping publish image step' 
 			}
 	} catch(e) {
+		println "Exception Occurred in build pipeline" + e
 		currentBuild.result = 'FAILED'
 	}
 }
