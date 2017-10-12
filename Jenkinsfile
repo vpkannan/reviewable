@@ -15,10 +15,10 @@ node('samplenode') {
 			 
 		stage 'Publish Image'
 			def branches = ['master']
-			def registryUrl = ""
+			def registryUrl = "https://hub.docker.com"
 			println "Current build result: " + currentBuild?.result
 			if((!currentBuild?.result || currentBuild?.result == 'SUCCESS') && branches.contains(env.BRANCH_NAME)) {
-				 docker.withRegistry(registryUrl, "") {
+				 docker.withRegistry(registryUrl, "Docker Hub") {
 				 	println 'Publishing image to docker repository: ' + registryUrl
 				 	sh './gradlew publishImage -Ddocker.registry.login.skip=true' 
 				 }

@@ -50,7 +50,6 @@ dependencies {
     	"org.springframework.boot:spring-boot-starter-data-rest",
     	"org.springframework.boot:spring-boot-starter-data-mongodb",
     	"javax.persistence:persistence-api:1.0"
-    	//"org.springframework.data:spring-data-jpa",
     ) 
     testCompile(
     	"org.springframework.boot:spring-boot-starter-test"
