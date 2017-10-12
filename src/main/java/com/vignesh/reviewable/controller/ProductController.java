@@ -3,9 +3,9 @@
  */
 package com.vignesh.reviewable.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,10 +29,15 @@ public class ProductController {
 		this.productService = productService;
 	}
 
+	// @RequestMapping(method = RequestMethod.GET)
+	// public List<Product> getAllProducts() {
+	// // TODO: call product service
+	// return null;
+	// }
+
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Product> getAllProducts() {
-		// TODO: call product service
-		return null;
+	public ResponseEntity<String> ping() {
+		return new ResponseEntity<String>("Hello World!", HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
