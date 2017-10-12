@@ -5,6 +5,7 @@ node('master') {
 		stage 'Build and Unit Test'
 			checkout scm
 			sh 'chmod 755 ./gradlew'
+			sh 'chmod 755 -R ./.gradle'
 			sh './gradlew clean build'
 			
 		stage 'Build Docker Image'
