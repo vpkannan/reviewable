@@ -8,10 +8,9 @@ node {
 			println "Current build result: " + currentBuild?.result
 			
 		stage 'Build Docker Image'
-			app = dokcer.build("vpkannan/reviewable")
+			app = docker.build("vpkannan/reviewable")
 			
 		stage 'Archive Reports'
-			 // Placeholder to archive test reports
 			 			
 		stage 'Publish Image'
 			def branches = ['master']
