@@ -6,7 +6,8 @@ node('master') {
 			sh './gradlew clean build'
 			
 		stage 'Build Docker Image'
-			sh './gradlew buildDocker'
+			//sh './gradlew buildDocker'
+			app = dokcer.build("vpkannan/reviewable")
 			
 		stage 'Archive Reports'
 			 // Placeholder to archive test reports
@@ -18,7 +19,9 @@ node('master') {
 			if((!currentBuild?.result || currentBuild?.result == 'SUCCESS') && branches.contains(env.BRANCH_NAME)) {
 				 docker.withRegistry(registryUrl, "docker-hub-credentials") {
 				 	println 'Publishing image to docker repository: ' + registryUrl
-				 	sh './gradlew publishImage' 
+				 	//sh './gradlew publishImage' 
+					app.push("${env.BUILD_NUMBER}")
+					app.push("latest")
 				 }
 			} else {
 				println 'Skipping publish image step' 
