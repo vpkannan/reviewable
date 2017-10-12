@@ -1,7 +1,7 @@
 version: '2'
 services:
   reviewable:
-    image: com.vignesh.reviewable/reviewable
+    image: com.craft.reviewable/reviewable
     build:
       context: build/docker
     ports:

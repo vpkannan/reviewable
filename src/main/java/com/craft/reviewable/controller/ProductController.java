@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.vignesh.reviewable.controller;
+package com.craft.reviewable.controller;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vignesh.reviewable.domain.Product;
-import com.vignesh.reviewable.service.ProductService;
+import com.craft.reviewable.domain.Product;
+import com.craft.reviewable.service.ProductService;
 
 /**
  * @author Vignesh

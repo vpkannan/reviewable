@@ -1,4 +1,4 @@
-package com.vignesh.reviewable;
+package com.craft.reviewable;
 
 import static org.junit.Assert.assertEquals;
 

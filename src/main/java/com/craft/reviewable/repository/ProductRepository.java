@@ -1,12 +1,12 @@
 /**
  * 
  */
-package com.vignesh.reviewable.repository;
+package com.craft.reviewable.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Component;
 
-import com.vignesh.reviewable.domain.Product;
+import com.craft.reviewable.domain.Product;
 
 /**
  * @author Vignesh

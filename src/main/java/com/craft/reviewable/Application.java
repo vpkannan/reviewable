@@ -1,4 +1,4 @@
-package com.vignesh.reviewable;
+package com.craft.reviewable;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

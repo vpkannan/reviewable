@@ -1,13 +1,13 @@
 /**
  * 
  */
-package com.vignesh.reviewable.service;
+package com.craft.reviewable.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.vignesh.reviewable.domain.Review;
+import com.craft.reviewable.domain.Review;
 
 /**
  * @author Vignesh

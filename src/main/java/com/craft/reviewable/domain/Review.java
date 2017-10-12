@@ -1,4 +1,4 @@
-package com.vignesh.reviewable.domain;
+package com.craft.reviewable.domain;
 
 import java.time.OffsetDateTime;
 

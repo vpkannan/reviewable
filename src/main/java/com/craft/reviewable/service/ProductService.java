@@ -1,8 +1,8 @@
-package com.vignesh.reviewable.service;
+package com.craft.reviewable.service;
 
 import java.util.List;
 
-import com.vignesh.reviewable.domain.Product;
+import com.craft.reviewable.domain.Product;
 
 public interface ProductService {
 
