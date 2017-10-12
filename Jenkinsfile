@@ -1,11 +1,8 @@
 node('master') { 	
-	env.GRADLE_USER_HOME = "/root/.gradle/${env.JOB_NAME}/.gradle"
-	
 	try {
 		stage 'Build and Unit Test'
 			checkout scm
 			sh 'chmod 755 ./gradlew'
-			sh 'sudo chmod 755 -R /root/.gradle'
 			sh './gradlew clean build'
 			
 		stage 'Build Docker Image'
