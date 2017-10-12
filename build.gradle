@@ -14,18 +14,16 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
-// tag::plugin[]
-apply plugin: 'docker'
-// end::plugin[]
 
-// This is used as the docker image prefix (org)
-group = 'com.craft.reviewable'
+apply plugin: 'docker'
+
+
+group = 'vpkannan'
 
 jar {
     baseName = 'reviewable'
 }
 
-// tag::task[]
 task buildDocker(type: Docker, dependsOn: build) {
   applicationName = "reviewable"
   dockerfile = file('Dockerfile')
@@ -36,7 +34,6 @@ task buildDocker(type: Docker, dependsOn: build) {
     }
   }
 }
-// end::task[]
 
 repositories {
     mavenCentral()
