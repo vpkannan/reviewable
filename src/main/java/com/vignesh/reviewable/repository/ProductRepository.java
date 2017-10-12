@@ -13,6 +13,6 @@ import com.vignesh.reviewable.domain.Product;
  *
  */
 @Component
-public interface ProductRepository extends MongoRepository<Product, Long> {
+public interface ProductRepository extends MongoRepository<Product, String> {
 
 }

@@ -14,8 +14,8 @@ public class Product {
 
 	@Id
 	@GeneratedValue
-	private long id;
-	private long name;
+	private String id;
+	private String name;
 	private double averageRating;
 	private List<Review> reviews;
 	private int oneStar;
@@ -24,7 +24,11 @@ public class Product {
 	private int fourStar;
 	private int fiveStar;
 
-	public Product(long id, long name, double averageRating, List<Review> reviews, int oneStar, int twoStar,
+	public Product() {
+		super();
+	}
+
+	public Product(String id, String name, double averageRating, List<Review> reviews, int oneStar, int twoStar,
 			int threeStar, int fourStar, int fiveStar) {
 		super();
 		this.id = id;
@@ -38,19 +42,19 @@ public class Product {
 		this.fiveStar = fiveStar;
 	}
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public long getName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setName(long name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
