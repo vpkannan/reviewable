@@ -1,5 +1,4 @@
-node {
-	def app 	
+node { 	
 	try {
 		stage 'Build and Unit Test'
 			checkout scm
@@ -8,18 +7,21 @@ node {
 			println "Current build result: " + currentBuild?.result
 			
 		stage 'Build Docker Image' 
-				app = docker.build("vpkannan/reviewable")
+			sh './gradlew buildDocker'
+			//app = docker.build("vpkannan/reviewable")
+			//println 'app value is: ' + app
 				
 		stage 'Archive Reports'
 			// place holder
 			
 		stage 'Publish Image'
-			def branches = ['master']
+			def branches = ['master', 'vignesh-rest']
 			def registryUrl = "https://registry.hub.docker.com"
 			if((!currentBuild?.result || currentBuild?.result == 'SUCCESS') && branches.contains(env.BRANCH_NAME)) {
 				 docker.withRegistry(registryUrl, "docker-hub-credentials") {
 				 	println 'Publishing image to docker repository: ' + registryUrl 
-            		app.push("latest")
+            		//app.push("latest")
+            		sh './gradlew publishImage'
 				 }
 			} else {
 				println 'Skipping publish image step' 

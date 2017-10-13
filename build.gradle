@@ -22,17 +22,31 @@ group = 'vpkannan'
 
 jar {
     baseName = 'reviewable'
+    archiveName = 'reviewable.jar'
 }
 
 task buildDocker(type: Docker, dependsOn: build) {
   applicationName = "reviewable"
   dockerfile = file('Dockerfile')
   doFirst {
-    copy {
+  	copy {
       from jar
       into stageDir
     }
   }
+}
+
+task publishImage (dependsOn: buildDocker) {
+	String registryUrl = "registry.hub.docker.com"
+	String appName = "vpkannan/reviewable"
+	
+	String latestImage = registryUrl + "/" + appName + ":latest"
+	doFirst { 
+		exec {
+			executable 'docker'
+			args 'push', latestImage 
+		}
+	} 
 }
 
 repositories {
