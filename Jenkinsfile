@@ -8,8 +8,9 @@ node {
 			println "Current build result: " + currentBuild?.result
 			
 		stage 'Build Docker Image'
-			app = docker.build("vpkannan/reviewable")
-			
+			docker.withTool('docker') { 
+				app = docker.build("vpkannan/reviewable")
+			}
 		stage 'Archive Reports'
 			// place holder
 			
