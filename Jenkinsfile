@@ -14,7 +14,7 @@ node {
 			// place holder
 			
 		stage 'Publish Image'
-			def branches = ['master', 'vignesh-rest']
+			def branches = ['master']
 			def registryUrl = "https://registry.hub.docker.com"
 			if((!currentBuild?.result || currentBuild?.result == 'SUCCESS') && branches.contains(env.BRANCH_NAME)) {
 				 docker.withRegistry(registryUrl, "docker-hub-credentials") {
