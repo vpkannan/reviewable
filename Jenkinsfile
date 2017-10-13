@@ -1,5 +1,4 @@
-node {
-	def app 	
+node { 	
 	try {
 		stage 'Build and Unit Test'
 			checkout scm
@@ -8,7 +7,9 @@ node {
 			println "Current build result: " + currentBuild?.result
 			
 		stage 'Build Docker Image' 
-			app = sh './gradlew buildDocker'
+			//sh './gradlew buildDocker'
+			app = docker.build("vpkannan/reviewable")
+			println 'app value is: ' + app
 				
 		stage 'Archive Reports'
 			// place holder
