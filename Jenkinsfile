@@ -8,7 +8,6 @@ node {
 			println "Current build result: " + currentBuild?.result
 			
 		stage 'Build Docker Image' 
-			sh './gradlew buildDocker'
 			app = docker.build("vpkannan/reviewable")
 				
 		stage 'Archive Reports'
