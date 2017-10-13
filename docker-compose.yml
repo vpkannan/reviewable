@@ -1,11 +1,17 @@
 version: '2'
 services:
   reviewable:
-    image: com.vignesh.reviewable/reviewable
+    image: com.craft.reviewable/reviewable
     build:
       context: build/docker
-    #entrypoint: java -jar reviewable.jar
     ports:
     - 9001:8080
+    depends_on:
+    - reviewabledb
+  reviewabledb:
+    image: mongo
+    ports:
+    - "27017:27017"
+    - "28017:28017"
     
     

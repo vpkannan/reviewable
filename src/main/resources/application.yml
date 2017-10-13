@@ -1,7 +1,10 @@
 server:
   port: 8080
 
-#TODO: figure out why I need this here and in bootstrap.yml
 spring:
   application:
-    name: reviewable
+    name: reviewable'
+  data:
+    mongodb:
+      uri: mongodb://reviewabledb:27017/reviewable
+      

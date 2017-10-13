@@ -14,18 +14,16 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
-// tag::plugin[]
-apply plugin: 'docker'
-// end::plugin[]
 
-// This is used as the docker image prefix (org)
-group = 'com.vignesh.reviewable'
+apply plugin: 'docker'
+
+
+group = 'vpkannan'
 
 jar {
     baseName = 'reviewable'
 }
 
-// tag::task[]
 task buildDocker(type: Docker, dependsOn: build) {
   applicationName = "reviewable"
   dockerfile = file('Dockerfile')
@@ -36,7 +34,6 @@ task buildDocker(type: Docker, dependsOn: build) {
     }
   }
 }
-// end::task[]
 
 repositories {
     mavenCentral()
@@ -46,7 +43,13 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web") 
-    testCompile("org.springframework.boot:spring-boot-starter-test")
+    compile(
+    	"org.springframework.boot:spring-boot-starter-data-rest",
+    	"org.springframework.boot:spring-boot-starter-data-mongodb",
+    	"javax.persistence:persistence-api:1.0"
+    ) 
+    testCompile(
+    	"org.springframework.boot:spring-boot-starter-test"
+    ) 
 }
 
