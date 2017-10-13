@@ -36,6 +36,18 @@ task buildDocker(type: Docker, dependsOn: build) {
   }
 }
 
+task publishImage {
+	String registryUrl = "registry.hub.docker.com"
+	String appName = "vpkannan/reviewable"
+	
+	String latestImage = registryUrl + "/" + appName + ":latest"
+	
+	exec {
+		executable 'docker'
+		args 'push', latestImage 
+	} 
+}
+
 repositories {
     mavenCentral()
 }
