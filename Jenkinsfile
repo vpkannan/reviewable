@@ -7,10 +7,9 @@ node {
 			sh './gradlew clean build'
 			println "Current build result: " + currentBuild?.result
 			
-		stage 'Build Docker Image'
-			docker.withTool('docker') { 
+		stage 'Build Docker Image' 
 				app = docker.build("vpkannan/reviewable")
-			}
+				
 		stage 'Archive Reports'
 			// place holder
 			
