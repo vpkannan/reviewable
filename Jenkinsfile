@@ -11,7 +11,8 @@ node {
 			app = docker.build("vpkannan/reviewable")
 			
 		stage 'Archive Reports'
-			 			
+			// place holder
+			
 		stage 'Publish Image'
 			def branches = ['master']
 			def registryUrl = "https://registry.hub.docker.com"
