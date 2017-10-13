@@ -41,10 +41,11 @@ task publishImage (dependsOn: buildDocker) {
 	String appName = "vpkannan/reviewable"
 	
 	String latestImage = registryUrl + "/" + appName + ":latest"
-	
-	exec {
-		executable 'docker'
-		args 'push', latestImage 
+	doFirst { 
+		exec {
+			executable 'docker'
+			args 'push', latestImage 
+		}
 	} 
 }
 
