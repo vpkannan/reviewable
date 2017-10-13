@@ -22,10 +22,11 @@ group = 'vpkannan'
 
 jar {
     baseName = 'reviewable'
+    archiveName = 'reviewable.jar'
 }
 
 task buildDocker(type: Docker, dependsOn: build) {
-  applicationName = "reviewable"
+  applicationName = "vpkannan/reviewable"
   dockerfile = file('Dockerfile')
   doFirst {
     copy {
