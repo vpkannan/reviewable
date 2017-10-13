@@ -68,7 +68,7 @@ public class ProductController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public Product createProduct(@Valid @RequestBody Product product) {
-		LOGGER.info("Incoming Payload: {}", product);
+		LOGGER.info("Incoming Product payload: {}", product);
 		return productService.createProduct(product);
 	}
 
