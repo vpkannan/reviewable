@@ -26,12 +26,12 @@ jar {
 }
 
 task buildDocker(type: Docker, dependsOn: build) {
-  applicationName = "vpkannan/reviewable"
+  applicationName = "reviewable"
   dockerfile = file('Dockerfile')
   doFirst {
-    exec {
-    	executable 'docker'
-    	args 'build', '-t', applicationName, '.' 
+  	copy {
+      from jar
+      into stageDir
     }
   }
 }
