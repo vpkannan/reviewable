@@ -6,9 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Entity
 public class Product {
 
@@ -112,6 +109,70 @@ public class Product {
 
 	public void setFiveStar(int fiveStar) {
 		this.fiveStar = fiveStar;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(averageRating);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + fiveStar;
+		result = prime * result + fourStar;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + oneStar;
+		result = prime * result + ((reviews == null) ? 0 : reviews.hashCode());
+		result = prime * result + threeStar;
+		result = prime * result + twoStar;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		if (Double.doubleToLongBits(averageRating) != Double.doubleToLongBits(other.averageRating))
+			return false;
+		if (fiveStar != other.fiveStar)
+			return false;
+		if (fourStar != other.fourStar)
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (oneStar != other.oneStar)
+			return false;
+		if (reviews == null) {
+			if (other.reviews != null)
+				return false;
+		} else if (!reviews.equals(other.reviews))
+			return false;
+		if (threeStar != other.threeStar)
+			return false;
+		if (twoStar != other.twoStar)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", name=" + name + ", averageRating=" + averageRating + ", reviews=" + reviews
+				+ ", oneStar=" + oneStar + ", twoStar=" + twoStar + ", threeStar=" + threeStar + ", fourStar="
+				+ fourStar + ", fiveStar=" + fiveStar + "]";
 	}
 
 }

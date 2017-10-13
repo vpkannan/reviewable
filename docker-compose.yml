@@ -1,7 +1,7 @@
 version: '2'
 services:
   reviewable:
-    image: com.craft.reviewable/reviewable
+    image: vpkannan/reviewable
     build:
       context: build/docker
     ports:
