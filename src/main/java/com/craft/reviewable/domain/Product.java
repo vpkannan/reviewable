@@ -1,12 +1,7 @@
 package com.craft.reviewable.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -23,20 +18,17 @@ public class Product {
 	private int threeStar;
 	private int fourStar;
 	private int fiveStar;
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-	private List<Review> reviews;
 
 	public Product() {
 		super();
 	}
 
-	public Product(String id, String name, double averageRating, List<Review> reviews, int oneStar, int twoStar,
-			int threeStar, int fourStar, int fiveStar) {
+	public Product(String id, String name, double averageRating, int oneStar, int twoStar, int threeStar, int fourStar,
+			int fiveStar) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.averageRating = averageRating;
-		this.reviews = reviews;
 		this.oneStar = oneStar;
 		this.twoStar = twoStar;
 		this.threeStar = threeStar;
@@ -64,15 +56,6 @@ public class Product {
 		return Math.round(newAverageRating * 10.0) / 10.0;
 	}
 
-	public List<Review> addReview(Review review) {
-		List<Review> reviews = this.getReviews();
-		if (reviews == null) {
-			reviews = new ArrayList<>();
-		}
-		reviews.add(review);
-		return reviews;
-	}
-
 	public String getId() {
 		return id;
 	}
@@ -95,14 +78,6 @@ public class Product {
 
 	public void setAverageRating(double averageRating) {
 		this.averageRating = averageRating;
-	}
-
-	public List<Review> getReviews() {
-		return reviews;
-	}
-
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
 	}
 
 	public int getOneStar() {
@@ -157,7 +132,6 @@ public class Product {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + oneStar;
-		result = prime * result + ((reviews == null) ? 0 : reviews.hashCode());
 		result = prime * result + threeStar;
 		result = prime * result + twoStar;
 		return result;
@@ -190,11 +164,6 @@ public class Product {
 			return false;
 		if (oneStar != other.oneStar)
 			return false;
-		if (reviews == null) {
-			if (other.reviews != null)
-				return false;
-		} else if (!reviews.equals(other.reviews))
-			return false;
 		if (threeStar != other.threeStar)
 			return false;
 		if (twoStar != other.twoStar)
@@ -206,7 +175,7 @@ public class Product {
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", averageRating=" + averageRating + ", oneStar=" + oneStar
 				+ ", twoStar=" + twoStar + ", threeStar=" + threeStar + ", fourStar=" + fourStar + ", fiveStar="
-				+ fiveStar + ", reviews=" + reviews + "]";
+				+ fiveStar + "]";
 	}
 
 }

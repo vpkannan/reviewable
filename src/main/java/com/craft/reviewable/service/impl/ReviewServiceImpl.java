@@ -1,9 +1,10 @@
 package com.craft.reviewable.service.impl;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.craft.reviewable.domain.Product;
@@ -24,25 +25,25 @@ public class ReviewServiceImpl implements ReviewService {
 	ProductRepository productRepository;
 
 	@Override
-	public List<Review> listProductReviews(String productId) throws ReviewableException {
-		Product product = productRepository.findOne(productId);
+	public Page<Review> listProductReviews(String productId, Pageable pageable) throws ReviewableException {
+		Page<Review> reviewsPage = reviewRepository.findByProductId(productId, pageable);
 
-		if (product == null) {
-			// Product not found
-			ReviewableError error = new ReviewableError();
-			error.setErrorCode("R-4001");
-			error.setErrorDescription("Product ID entered is invalid");
-			ReviewableException ex = new ReviewableException(error);
-			throw ex;
-		}
+		// if (reviewsPage == null || reviewsPage.getContent().size() == 0) {
+		// // Product not found
+		// ReviewableError error = new ReviewableError();
+		// error.setErrorCode("R-4001");
+		// error.setErrorDescription("Product ID entered is invalid");
+		// ReviewableException ex = new ReviewableException(error);
+		// throw ex;
+		// }
 
-		return product.getReviews();
+		return reviewsPage;
 	}
-	
 
 	@Override
-	public String addReview(Review review) throws ReviewableException {
-		Product product = productRepository.findOne(review.getProduct().getId());
+	public Review addReview(Review review) throws ReviewableException {
+
+		Product product = productRepository.findOne(review.getProductId());
 
 		if (product == null) {
 			// Product not found
@@ -56,12 +57,14 @@ public class ReviewServiceImpl implements ReviewService {
 		if (review.getDate() == null)
 			review.setDate(new Date());
 
-		product.setReviews(product.addReview(review));
-		product.setAverageRating(product.calculateNewAverageRating(review.getRating()));
+		Review addedReview = reviewRepository.save(review);
+
+		// product.setReviews(product.addReview(addedReview));
+		product.setAverageRating(product.calculateNewAverageRating(addedReview.getRating()));
 
 		productRepository.save(product);
 
-		return "Successfully added review";
+		return addedReview;
 	}
 
 }
