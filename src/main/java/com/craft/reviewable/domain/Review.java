@@ -1,12 +1,13 @@
 package com.craft.reviewable.domain;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
@@ -22,13 +23,14 @@ public class Review {
 	private String reviewTitle;
 	private String reviewText;
 	private String userName;
-	private OffsetDateTime date;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC")
+	private Date date;
 
 	public Review() {
 		super();
 	}
 
-	public Review(String id, int rating, String reviewTitle, String reviewText, String userName, OffsetDateTime date) {
+	public Review(String id, int rating, String reviewTitle, String reviewText, String userName, Date date) {
 		super();
 		this.id = id;
 		this.rating = rating;
@@ -86,11 +88,11 @@ public class Review {
 		this.userName = userName;
 	}
 
-	public OffsetDateTime getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(OffsetDateTime date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

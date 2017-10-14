@@ -16,7 +16,7 @@ import com.craft.reviewable.exception.ReviewableException;
 @ControllerAdvice
 @EnableWebMvc
 @Order(Ordered.LOWEST_PRECEDENCE)
-public class ReviewableRestExceptionHandler extends ResponseEntityExceptionHandler {
+public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(ReviewableException.class)
 	@ResponseBody

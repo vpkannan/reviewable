@@ -1,5 +1,6 @@
 package com.craft.reviewable.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,19 @@ public class ReviewServiceImpl implements ReviewService {
 	ProductRepository productRepository;
 
 	@Override
-	public List<Review> getAllReviews(String productId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Review> listProductReviews(String productId) throws ReviewableException {
+		Product product = productRepository.findOne(productId);
+
+		if (product == null) {
+			// Product not found
+			ReviewableError error = new ReviewableError();
+			error.setErrorCode("R-4001");
+			error.setErrorDescription("Product ID entered is invalid");
+			ReviewableException ex = new ReviewableException(error);
+			throw ex;
+		}
+
+		return product.getReviews();
 	}
 
 	@Override
@@ -40,6 +51,9 @@ public class ReviewServiceImpl implements ReviewService {
 			ReviewableException ex = new ReviewableException(error);
 			throw ex;
 		}
+
+		if (review.getDate() == null)
+			review.setDate(new Date());
 
 		product.setReviews(product.addReview(review));
 		product.setAverageRating(product.calculateNewAverageRating(review.getRating()));

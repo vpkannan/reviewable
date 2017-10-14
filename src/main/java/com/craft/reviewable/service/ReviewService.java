@@ -18,7 +18,7 @@ import com.craft.reviewable.exception.ReviewableException;
 @Component
 public interface ReviewService {
 
-	public List<Review> getAllReviews(String productId);
+	public List<Review> listProductReviews(String productId) throws ReviewableException;
 
 	public String addReview(Review review) throws ReviewableException;
 
