@@ -6,12 +6,15 @@ package com.craft.reviewable.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.craft.reviewable.domain.Review;
+import com.craft.reviewable.exception.ReviewableException;
 import com.craft.reviewable.service.ReviewService;
 
 /**
@@ -33,6 +36,19 @@ public class ReviewController {
 	public ResponseEntity<List<Review>> getAllReviews() {
 		// TODO: call service
 		return null;
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<String> addReview(@RequestBody Review review) throws ReviewableException {
+
+		String addedReview = "";
+		try {
+			addedReview = reviewService.addReview(review);
+		} catch (ReviewableException ex) {
+			throw ex;
+		}
+		return new ResponseEntity<String>(addedReview, HttpStatus.CREATED);
+
 	}
 
 }

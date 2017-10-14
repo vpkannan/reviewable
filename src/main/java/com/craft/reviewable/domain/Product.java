@@ -1,25 +1,30 @@
 package com.craft.reviewable.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Product {
 
 	@Id
-	@GeneratedValue
 	private String id;
 	private String name;
 	private double averageRating;
-	private List<Review> reviews;
 	private int oneStar;
 	private int twoStar;
 	private int threeStar;
 	private int fourStar;
 	private int fiveStar;
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<Review> reviews;
 
 	public Product() {
 		super();
@@ -37,6 +42,35 @@ public class Product {
 		this.threeStar = threeStar;
 		this.fourStar = fourStar;
 		this.fiveStar = fiveStar;
+	}
+
+	public double calculateNewAverageRating(int rating) {
+
+		if (rating == 1)
+			this.setOneStar(this.getOneStar() + 1);
+		else if (rating == 2)
+			this.setTwoStar(this.getTwoStar() + 1);
+		else if (rating == 3)
+			this.setThreeStar(this.getThreeStar() + 1);
+		else if (rating == 4)
+			this.setFourStar(this.getFourStar() + 1);
+		else
+			this.setFiveStar(this.getFiveStar() + 1);
+
+		double newAverageRating = 0.0;
+		newAverageRating = (1.0 * oneStar + 2.0 * twoStar + 3.0 * threeStar + 4.0 * fourStar + 5.0 * fiveStar)
+				/ ((double) (oneStar + twoStar + threeStar + fourStar + fiveStar));
+
+		return Math.round(newAverageRating * 10.0) / 10.0;
+	}
+
+	public List<Review> addReview(Review review) {
+		List<Review> reviews = this.getReviews();
+		if (reviews == null) {
+			reviews = new ArrayList<>();
+		}
+		reviews.add(review);
+		return reviews;
 	}
 
 	public String getId() {
@@ -170,9 +204,9 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", averageRating=" + averageRating + ", reviews=" + reviews
-				+ ", oneStar=" + oneStar + ", twoStar=" + twoStar + ", threeStar=" + threeStar + ", fourStar="
-				+ fourStar + ", fiveStar=" + fiveStar + "]";
+		return "Product [id=" + id + ", name=" + name + ", averageRating=" + averageRating + ", oneStar=" + oneStar
+				+ ", twoStar=" + twoStar + ", threeStar=" + threeStar + ", fourStar=" + fourStar + ", fiveStar="
+				+ fiveStar + ", reviews=" + reviews + "]";
 	}
 
 }
