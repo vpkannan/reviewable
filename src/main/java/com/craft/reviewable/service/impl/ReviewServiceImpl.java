@@ -35,7 +35,6 @@ public class ReviewServiceImpl implements ReviewService {
 			ReviewableException ex = new ReviewableException(error);
 			throw ex;
 		}
-		
 
 		return product.getReviews();
 	}
