@@ -3,32 +3,38 @@ package com.craft.reviewable.domain;
 import java.time.OffsetDateTime;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Review {
 
 	@Id
-	@GeneratedValue
 	private String id;
+	@ManyToOne
+	@JoinColumn(name = "productId")
+	private Product product;
 	private int rating;
 	private String reviewTitle;
 	private String reviewText;
-	private String userId;
+	private String userName;
 	private OffsetDateTime date;
 
 	public Review() {
 		super();
 	}
 
-	public Review(String id, int rating, String reviewTitle, String reviewText, String userId, OffsetDateTime date) {
+	public Review(String id, int rating, String reviewTitle, String reviewText, String userName, OffsetDateTime date) {
 		super();
 		this.id = id;
 		this.rating = rating;
 		this.reviewTitle = reviewTitle;
 		this.reviewText = reviewText;
-		this.userId = userId;
+		this.userName = userName;
 		this.date = date;
 	}
 
@@ -38,6 +44,14 @@ public class Review {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public int getRating() {
@@ -64,12 +78,12 @@ public class Review {
 		this.reviewText = reviewText;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public OffsetDateTime getDate() {
@@ -86,10 +100,11 @@ public class Review {
 		int result = 1;
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result + rating;
 		result = prime * result + ((reviewText == null) ? 0 : reviewText.hashCode());
 		result = prime * result + ((reviewTitle == null) ? 0 : reviewTitle.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
 
@@ -112,6 +127,11 @@ public class Review {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (product == null) {
+			if (other.product != null)
+				return false;
+		} else if (!product.equals(other.product))
+			return false;
 		if (rating != other.rating)
 			return false;
 		if (reviewText == null) {
@@ -124,10 +144,10 @@ public class Review {
 				return false;
 		} else if (!reviewTitle.equals(other.reviewTitle))
 			return false;
-		if (userId == null) {
-			if (other.userId != null)
+		if (userName == null) {
+			if (other.userName != null)
 				return false;
-		} else if (!userId.equals(other.userId))
+		} else if (!userName.equals(other.userName))
 			return false;
 		return true;
 	}
@@ -135,7 +155,7 @@ public class Review {
 	@Override
 	public String toString() {
 		return "Review [id=" + id + ", rating=" + rating + ", reviewTitle=" + reviewTitle + ", reviewText=" + reviewText
-				+ ", userId=" + userId + ", date=" + date + "]";
+				+ ", userName=" + userName + ", date=" + date + "]";
 	}
 
 }

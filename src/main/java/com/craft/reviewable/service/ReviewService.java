@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.craft.reviewable.domain.Review;
+import com.craft.reviewable.exception.ReviewableException;
 
 /**
  * @author Vignesh
@@ -17,10 +18,8 @@ import com.craft.reviewable.domain.Review;
 @Component
 public interface ReviewService {
 
-	public List<Review> getAllReviews(long productId);
+	public List<Review> getAllReviews(String productId);
 
-	public Review getReviewById(long id);
-
-	public Review createReview(Review review);
+	public String addReview(Review review) throws ReviewableException;
 
 }
