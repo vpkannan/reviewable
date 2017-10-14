@@ -17,9 +17,6 @@ import com.craft.reviewable.domain.Review;
 @Component
 public interface ReviewRepository extends PagingAndSortingRepository<Review, String> {
 
-	// @Query("{'product': {'id': ?1}}")
-	// Page<Review> findReviewsForProduct(String productId, Pageable pageable);
-
 	Page<Review> findByProductId(String productId, Pageable pageable);
 
 }

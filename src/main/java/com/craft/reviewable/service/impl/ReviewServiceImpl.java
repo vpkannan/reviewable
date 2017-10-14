@@ -28,14 +28,14 @@ public class ReviewServiceImpl implements ReviewService {
 	public Page<Review> listProductReviews(String productId, Pageable pageable) throws ReviewableException {
 		Page<Review> reviewsPage = reviewRepository.findByProductId(productId, pageable);
 
-		// if (reviewsPage == null || reviewsPage.getContent().size() == 0) {
-		// // Product not found
-		// ReviewableError error = new ReviewableError();
-		// error.setErrorCode("R-4001");
-		// error.setErrorDescription("Product ID entered is invalid");
-		// ReviewableException ex = new ReviewableException(error);
-		// throw ex;
-		// }
+		if (reviewsPage == null || reviewsPage.getContent().size() == 0) {
+			// Product not found
+			ReviewableError error = new ReviewableError();
+			error.setErrorCode("R-4001");
+			error.setErrorDescription("Product ID entered is invalid");
+			ReviewableException ex = new ReviewableException(error);
+			throw ex;
+		}
 
 		return reviewsPage;
 	}
@@ -59,7 +59,6 @@ public class ReviewServiceImpl implements ReviewService {
 
 		Review addedReview = reviewRepository.save(review);
 
-		// product.setReviews(product.addReview(addedReview));
 		product.setAverageRating(product.calculateNewAverageRating(addedReview.getRating()));
 
 		productRepository.save(product);
