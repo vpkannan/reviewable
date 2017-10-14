@@ -3,9 +3,9 @@
  */
 package com.craft.reviewable.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,11 +34,11 @@ public class ReviewController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Review>> getAllReviews(@RequestParam(value = "pid", required = true) String pid)
-			throws ReviewableException {
+	public ResponseEntity<Page<Review>> getAllReviews(@RequestParam(value = "pid", required = true) String pid,
+			Pageable pageable) throws ReviewableException {
 		try {
-			List<Review> productReviews = reviewService.listProductReviews(pid);
-			return new ResponseEntity<List<Review>>(productReviews, HttpStatus.CREATED);
+			Page<Review> productReviews = reviewService.listProductReviews(pid, pageable);
+			return new ResponseEntity<Page<Review>>(productReviews, HttpStatus.CREATED);
 		} catch (ReviewableException ex) {
 			throw ex;
 		}
@@ -46,15 +46,14 @@ public class ReviewController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<String> addReview(@RequestBody Review review) throws ReviewableException {
+	public ResponseEntity<Review> addReview(@RequestBody Review review) throws ReviewableException {
 
-		String addedReview = "";
 		try {
-			addedReview = reviewService.addReview(review);
+			Review addedReview = reviewService.addReview(review);
+			return new ResponseEntity<Review>(addedReview, HttpStatus.CREATED);
 		} catch (ReviewableException ex) {
 			throw ex;
 		}
-		return new ResponseEntity<String>(addedReview, HttpStatus.CREATED);
 
 	}
 

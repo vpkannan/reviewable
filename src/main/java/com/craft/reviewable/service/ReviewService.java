@@ -3,8 +3,8 @@
  */
 package com.craft.reviewable.service;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.craft.reviewable.domain.Review;
@@ -18,8 +18,8 @@ import com.craft.reviewable.exception.ReviewableException;
 @Component
 public interface ReviewService {
 
-	public List<Review> listProductReviews(String productId) throws ReviewableException;
+	public Page<Review> listProductReviews(String productId, Pageable pageable) throws ReviewableException;
 
-	public String addReview(Review review) throws ReviewableException;
+	public Review addReview(Review review) throws ReviewableException;
 
 }

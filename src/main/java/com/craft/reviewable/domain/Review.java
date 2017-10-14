@@ -4,8 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -16,9 +14,7 @@ public class Review {
 
 	@Id
 	private String id;
-	@ManyToOne
-	@JoinColumn(name = "productId")
-	private Product product;
+	private String productId;
 	private int rating;
 	private String reviewTitle;
 	private String reviewText;
@@ -30,9 +26,11 @@ public class Review {
 		super();
 	}
 
-	public Review(String id, int rating, String reviewTitle, String reviewText, String userName, Date date) {
+	public Review(String id, String productId, int rating, String reviewTitle, String reviewText, String userName,
+			Date date) {
 		super();
 		this.id = id;
+		this.productId = productId;
 		this.rating = rating;
 		this.reviewTitle = reviewTitle;
 		this.reviewText = reviewText;
@@ -48,12 +46,12 @@ public class Review {
 		this.id = id;
 	}
 
-	public Product getProduct() {
-		return product;
+	public String getProductId() {
+		return productId;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProductId(String productId) {
+		this.productId = productId;
 	}
 
 	public int getRating() {
@@ -102,7 +100,7 @@ public class Review {
 		int result = 1;
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((product == null) ? 0 : product.hashCode());
+		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
 		result = prime * result + rating;
 		result = prime * result + ((reviewText == null) ? 0 : reviewText.hashCode());
 		result = prime * result + ((reviewTitle == null) ? 0 : reviewTitle.hashCode());
@@ -129,10 +127,10 @@ public class Review {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (product == null) {
-			if (other.product != null)
+		if (productId == null) {
+			if (other.productId != null)
 				return false;
-		} else if (!product.equals(other.product))
+		} else if (!productId.equals(other.productId))
 			return false;
 		if (rating != other.rating)
 			return false;
@@ -156,8 +154,8 @@ public class Review {
 
 	@Override
 	public String toString() {
-		return "Review [id=" + id + ", rating=" + rating + ", reviewTitle=" + reviewTitle + ", reviewText=" + reviewText
-				+ ", userName=" + userName + ", date=" + date + "]";
+		return "Review [id=" + id + ", productId=" + productId + ", rating=" + rating + ", reviewTitle=" + reviewTitle
+				+ ", reviewText=" + reviewText + ", userName=" + userName + ", date=" + date + "]";
 	}
 
 }
