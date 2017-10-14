@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.craft.reviewable.domain.Review;
@@ -33,9 +34,15 @@ public class ReviewController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Review>> getAllReviews() {
-		// TODO: call service
-		return null;
+	public ResponseEntity<List<Review>> getAllReviews(@RequestParam(value = "pid", required = true) String pid)
+			throws ReviewableException {
+		try {
+			List<Review> productReviews = reviewService.listProductReviews(pid);
+			return new ResponseEntity<List<Review>>(productReviews, HttpStatus.CREATED);
+		} catch (ReviewableException ex) {
+			throw ex;
+		}
+
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
