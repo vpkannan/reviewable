@@ -60,6 +60,7 @@ public class ReviewControllerTest {
 		ReviewController controller = new ReviewController(reviewService);
 		ResponseEntity<Review> addedReview = controller.addReview(review);
 		assertEquals(addedReview.getBody().getId(), "abc1234");
+		assertEquals(addedReview.getBody().getId(), review.getProductId());
 		assertEquals(addedReview.getBody().getReviewTitle(), review.getReviewTitle());
 		assertEquals(addedReview.getBody().getReviewText(), review.getReviewText());
 		assertEquals(addedReview.getBody().getUserName(), review.getUserName());

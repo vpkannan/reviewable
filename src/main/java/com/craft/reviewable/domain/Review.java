@@ -98,15 +98,15 @@ public class Review {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int PRIME = 31;
 		int result = 1;
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
-		result = prime * result + rating;
-		result = prime * result + ((reviewText == null) ? 0 : reviewText.hashCode());
-		result = prime * result + ((reviewTitle == null) ? 0 : reviewTitle.hashCode());
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		result = PRIME * result + ((date == null) ? 0 : date.hashCode());
+		result = PRIME * result + ((id == null) ? 0 : id.hashCode());
+		result = PRIME * result + ((productId == null) ? 0 : productId.hashCode());
+		result = PRIME * result + rating;
+		result = PRIME * result + ((reviewText == null) ? 0 : reviewText.hashCode());
+		result = PRIME * result + ((reviewTitle == null) ? 0 : reviewTitle.hashCode());
+		result = PRIME * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
 
