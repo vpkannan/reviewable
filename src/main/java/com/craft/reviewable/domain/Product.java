@@ -3,6 +3,8 @@ package com.craft.reviewable.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
@@ -147,36 +149,14 @@ public class Product {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (obj == this)
 			return true;
-		if (obj == null)
+		if (!(obj instanceof Product))
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Product other = (Product) obj;
-		if (Double.doubleToLongBits(averageRating) != Double.doubleToLongBits(other.averageRating))
-			return false;
-		if (fiveStar != other.fiveStar)
-			return false;
-		if (fourStar != other.fourStar)
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (oneStar != other.oneStar)
-			return false;
-		if (threeStar != other.threeStar)
-			return false;
-		if (twoStar != other.twoStar)
-			return false;
-		return true;
+		Product p = (Product) obj;
+		return new EqualsBuilder().append(id, p.id).append(name, p.name).append(averageRating, p.averageRating)
+				.append(oneStar, p.oneStar).append(twoStar, p.twoStar).append(threeStar, p.threeStar)
+				.append(fourStar, p.fourStar).append(fiveStar, p.fiveStar).isEquals();
 	}
 
 	@Override

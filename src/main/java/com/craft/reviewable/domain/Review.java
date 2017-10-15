@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -110,46 +112,14 @@ public class Review {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (obj == this)
 			return true;
-		if (obj == null)
+		if (!(obj instanceof Review))
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Review other = (Review) obj;
-		if (date == null) {
-			if (other.date != null)
-				return false;
-		} else if (!date.equals(other.date))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (productId == null) {
-			if (other.productId != null)
-				return false;
-		} else if (!productId.equals(other.productId))
-			return false;
-		if (rating != other.rating)
-			return false;
-		if (reviewText == null) {
-			if (other.reviewText != null)
-				return false;
-		} else if (!reviewText.equals(other.reviewText))
-			return false;
-		if (reviewTitle == null) {
-			if (other.reviewTitle != null)
-				return false;
-		} else if (!reviewTitle.equals(other.reviewTitle))
-			return false;
-		if (userName == null) {
-			if (other.userName != null)
-				return false;
-		} else if (!userName.equals(other.userName))
-			return false;
-		return true;
+		Review r = (Review) obj;
+		return new EqualsBuilder().append(id, r.id).append(productId, r.productId).append(rating, r.rating)
+				.append(reviewText, r.reviewText).append(reviewTitle, r.reviewTitle).append(userName, r.userName)
+				.isEquals();
 	}
 
 	@Override
