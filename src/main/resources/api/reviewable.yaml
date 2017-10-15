@@ -129,6 +129,24 @@ paths:
         description: The unique ID of the Product to look up
         required: true
         type: string
+      - name: size
+        in: query
+        description: Number of records to be returned in the page
+        required: false
+        type: integer
+        format: int32
+      - name: page
+        in: query
+        description: The page number
+        required: false
+        type: integer
+        format: int32
+      - name: sort
+        in: query
+        description: Criteria to sort the records in the response
+        required: false
+        type: integer
+        format: int32
       responses:
         200:
           description: Successfully retrieved Reviews
