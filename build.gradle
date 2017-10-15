@@ -75,13 +75,9 @@ dependencies {
 
 // SonarQube configuration
 
-ext {
-	branchName = System.getenv("BRANCH_NAME")
-}
-
 sonarqube {
 	properties {
-		property "sonar.projectName", ("${branchName}" != "master") ? "Reviewable"+"${$branchName}" : "Reviewable"
+		property "sonar.projectName", "Reviewable"
 		property "sonar.branch"
 		property "sonar.projectVersion", "1.0"
 		property "sonar.host.url", "http://ec2-34-215-128-136.us-west-2.compute.amazonaws.com:9000" 

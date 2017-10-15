@@ -9,7 +9,11 @@ node {
 		stage 'Publish Test Results'
 			println "Publishing test results to Sonarqube"
 			sh './gradlew jacocoTestReport'
-			sh './gradlew sonarqube -Dsonar.branch=env.BRANCH_NAME'
+			if(isMasterBranch()) {
+				sh './gradlew sonarqube'
+			} else {
+				sh './gradlew sonarqube -Dsonar.projectName=Reviewable-{$env.BRANCH_NAME}' 
+			}
 		
 		stage 'Build Docker Image' 
 			sh './gradlew buildDocker'
@@ -20,9 +24,9 @@ node {
 			// place holder
 			
 		stage 'Publish Image'
-			def branches = ['master']
+			
 			def registryUrl = "https://registry.hub.docker.com"
-			if((!currentBuild?.result || currentBuild?.result == 'SUCCESS') && branches.contains(env.BRANCH_NAME)) {
+			if((!currentBuild?.result || currentBuild?.result == 'SUCCESS') && isMasterBranch()) {
 				 docker.withRegistry(registryUrl, "docker-hub-credentials") {
 				 	println 'Publishing image to docker repository: ' + registryUrl 
             		//app.push("latest")
@@ -35,4 +39,9 @@ node {
 		println "Exception Occurred in build pipeline: " + e
 		currentBuild.result = 'FAILED'
 	}
+}
+
+def isMasterBranch() {
+	 def branches = ['master']
+	 branches.contains(env.BRANCH_NAME)
 }
