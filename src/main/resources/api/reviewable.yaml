@@ -1,0 +1,212 @@
+swagger: '2.0'
+info:
+  description: Reviewable is a Product Review Engine. It exposes REST API to create Products, add Reviews to the Product, retrieve details of a Product and retrieve the reviews for a given Product. Product also stores the average product rating as and when Reviews are added.
+  version: v1.0
+  title: Swagger Reviewable
+  contact:
+    email: vignesh.p.kannan@gmail.com
+basePath: /v1.0
+tags:
+- name: product
+  description: Everything about the Products
+- name: review
+  description: Products are associated with Reviews
+schemes:
+- http
+paths:
+  /product:
+    post:
+      tags:
+      - product
+      summary: Create a new Product
+      description: Add new Product to the Reviewable - Product Review Engine
+      operationId: createProduct
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Product object that needs to be added
+        required: true
+        schema:
+          $ref: '#/definitions/Product'
+      responses:
+        201:
+          description: Product created
+          schema:
+            $ref: '#/definitions/Product'
+        400:
+          description: Invalid input
+  /product/{id}:
+    get:
+      tags:
+      - product
+      summary: Finds Product by ID
+      description: Retrieve Product details along with average rating based on a given product ID
+      operationId: getProductById
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the Product to look up
+        required: true
+        type: string
+      responses:
+        200:
+          description: Successfully retrieved Product details
+          schema:
+            $ref: '#/definitions/Product'
+        404:
+          description: Invalid Product ID
+          schema:
+            $ref: '#/definitions/ReviewableError'
+  /product/all:
+    get:
+      tags:
+      - product
+      summary: List all Products
+      description: Retrieve a list of all Products. No Pagination supported.
+      operationId: getAllProducts
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Successfully retrieved the list of Products
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        404:
+          description: No Products found
+          schema:
+            $ref: '#/definitions/ReviewableError'
+  /review:
+    post:
+      tags:
+      - review
+      summary: Add Review to a Product
+      description: Add Review to a Product based on the Product ID mentioned in the request.
+      operationId: addReview
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: review
+        description: The Review object representing the Review to be created
+        required: true
+        schema:
+          $ref: '#/definitions/Review'
+      responses:
+        200:
+          description: Successfully created Review
+          schema:
+            $ref: '#/definitions/Review'
+        404:
+          description: Invalid Product ID
+          schema:
+            $ref: '#/definitions/ReviewableError'
+        400:
+          description: Invalid Request
+          schema:
+            $ref: '#/definitions/ReviewableError'
+  /review/{pid}:
+    get:
+      tags:
+      - review
+      summary: List all Reviews for a Product
+      description: Returns a List of all Reviews for a given Product based on the Product ID. The response is paginated based on the paging criteria provided.
+      operationId: getReviewsForProduct
+      produces:
+      - application/json
+      parameters:
+      - name: pid
+        in: path
+        description: The unique ID of the Product to look up
+        required: true
+        type: string
+      - name: size
+        in: query
+        description: Number of records to be returned in the page
+        required: false
+        type: integer
+        format: int32
+      - name: page
+        in: query
+        description: The page number
+        required: false
+        type: integer
+        format: int32
+      - name: sort
+        in: query
+        description: Criteria to sort the records in the response
+        required: false
+        type: integer
+        format: int32
+      responses:
+        200:
+          description: Successfully retrieved Reviews
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Review'
+        404:
+          description: Invalid Product ID
+          schema:
+            $ref: '#/definitions/ReviewableError'
+definitions:
+  Product:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      averageRating:
+        type: number
+        format: double
+      oneStar:
+        type: integer
+        format: int32
+      twoStar:
+        type: integer
+        format: int32
+      threeStar:
+        type: integer
+        format: int32
+      fourStar:
+        type: integer
+        format: int32
+      fiveStar:
+        type: integer
+        format: int32
+  Review:
+    type: object
+    properties:
+      id:
+        type: string
+      productId:
+        type: string
+      rating:
+        type: integer
+        format: int32
+      reviewTitle:
+        type: string
+      reviewText:
+        type: string
+      userName:
+        type: string
+      date:
+        type: string
+        format: date-time
+  ReviewableError:
+    type: object
+    properties:
+      errorCode:
+        type: string
+      errorDescription:
+        type: string
