@@ -1,6 +1,7 @@
 package com.craft.reviewable.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -61,6 +62,7 @@ public class ReviewControllerTest {
 		assertEquals(addedReview.getBody().getReviewText(), review.getReviewText());
 		assertEquals(addedReview.getBody().getUserName(), review.getUserName());
 		assertEquals(addedReview.getBody().getRating(), review.getRating());
+		assertNotNull(addedReview.getBody().getDate());
 		assertEquals(addedReview.getStatusCode(), HttpStatus.CREATED);
 	}
 
