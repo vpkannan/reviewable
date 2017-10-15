@@ -55,7 +55,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 		Page<Review> reviewsPage = reviewRepository.findByProductId(productId, pageable);
 
-		if (reviewsPage == null || reviewsPage.getContent().size() == 0) {
+		if (reviewsPage == null || reviewsPage.getContent().isEmpty()) {
 			LOGGER.info("Product with the given product ID is not found in DB");
 			LOGGER.info("Throwing a customized error message");
 			ReviewableError error = new ReviewableError();

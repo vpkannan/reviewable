@@ -54,7 +54,7 @@ public class ReviewController {
 		LOGGER.debug("Requested product ID: {}", pid);
 		try {
 			Page<Review> productReviews = reviewService.listProductReviews(pid, pageable);
-			return new ResponseEntity<Page<Review>>(productReviews, HttpStatus.OK);
+			return new ResponseEntity<>(productReviews, HttpStatus.OK);
 		} catch (ReviewableException ex) {
 			LOGGER.info("Throwing the exception customized error");
 			throw ex;
@@ -76,7 +76,7 @@ public class ReviewController {
 		LOGGER.debug("New review details received by REST API: {}", review);
 		try {
 			Review addedReview = reviewService.addReview(review);
-			return new ResponseEntity<Review>(addedReview, HttpStatus.CREATED);
+			return new ResponseEntity<>(addedReview, HttpStatus.CREATED);
 		} catch (ReviewableException ex) {
 			LOGGER.info("Throwing the exception customized error");
 			throw ex;
