@@ -41,6 +41,7 @@ public class ReviewControllerTest {
 
 		Review mockedReview = new Review();
 		mockedReview.setId("abc1234");
+		mockedReview.setProductId("xyz4321");
 		mockedReview.setRating(5);
 		mockedReview.setReviewTitle("Good Phone");
 		mockedReview.setReviewText("Good Phone. Nice Camera");
@@ -48,6 +49,7 @@ public class ReviewControllerTest {
 		mockedReview.setDate(new Date());
 
 		Review review = new Review();
+		review.setProductId("xyz4321");
 		review.setRating(5);
 		review.setReviewTitle("Good Phone");
 		review.setReviewText("Good Phone. Nice Camera");
