@@ -46,8 +46,8 @@ public class ReviewServiceImpl implements ReviewService {
 			LOGGER.info("Product with the given product ID is not found in DB");
 			LOGGER.info("Throwing a customized error message");
 			ReviewableError error = new ReviewableError();
-			error.setErrorCode("R-4001");
-			error.setErrorDescription("Could not fetch reviews for the product. Product ID entered is invalid.");
+			error.setErrorCode("R-4002");
+			error.setErrorDescription("Could not fetch reviews for the product. Invalid data");
 			ReviewableException ex = new ReviewableException(error);
 			LOGGER.debug("Exception stacktrace: {}", ex);
 			throw ex;

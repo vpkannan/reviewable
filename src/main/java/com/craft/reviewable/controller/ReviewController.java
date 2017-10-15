@@ -10,10 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.craft.reviewable.domain.Review;
@@ -25,7 +25,7 @@ import com.craft.reviewable.service.ReviewService;
  *
  */
 @RestController
-@RequestMapping("reviews")
+@RequestMapping("/v1.0/review")
 public class ReviewController {
 
 	public static final Logger LOGGER = LoggerFactory.getLogger(com.craft.reviewable.controller.ReviewController.class);
@@ -47,10 +47,10 @@ public class ReviewController {
 	 * @return The Page of Review objects filtered based on Pageable
 	 * @throws ReviewableException
 	 */
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<Page<Review>> getAllReviews(@RequestParam(value = "pid", required = true) String pid,
-			Pageable pageable) throws ReviewableException {
-		LOGGER.info("Executing GET API on /review/{pid}");
+	@RequestMapping(path = "/{pid}", method = RequestMethod.GET)
+	public ResponseEntity<Page<Review>> getReviewsForProduct(@PathVariable final String pid, Pageable pageable)
+			throws ReviewableException {
+		LOGGER.info("Executing GET API on /v1.0/review/{pid}");
 		LOGGER.debug("Requested product ID: {}", pid);
 		try {
 			Page<Review> productReviews = reviewService.listProductReviews(pid, pageable);
@@ -72,7 +72,7 @@ public class ReviewController {
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Review> addReview(@RequestBody Review review) throws ReviewableException {
-		LOGGER.info("Executing POST API on /reviews");
+		LOGGER.info("Executing POST API on /v1.0/review");
 		LOGGER.debug("New review details received by REST API: {}", review);
 		try {
 			Review addedReview = reviewService.addReview(review);

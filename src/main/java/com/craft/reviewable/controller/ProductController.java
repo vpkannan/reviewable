@@ -14,10 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.craft.reviewable.domain.Product;
@@ -31,7 +31,7 @@ import com.craft.reviewable.validator.ProductValidator;
  */
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/v1.0/product")
 public class ProductController {
 
 	@Autowired
@@ -62,7 +62,7 @@ public class ProductController {
 	 */
 	@RequestMapping(path = "/all", method = RequestMethod.GET)
 	public List<Product> getAllProducts() {
-		LOGGER.info("Executing GET API on /products/all");
+		LOGGER.info("Executing GET API on /v1.0/product/all");
 		return productService.getAllProducts();
 	}
 
@@ -74,9 +74,9 @@ public class ProductController {
 	 * @return The Product entity
 	 * @throws ReviewableException
 	 */
-	@RequestMapping(method = RequestMethod.GET)
-	public Product getProductById(@RequestParam(value = "id", required = true) String id) throws ReviewableException {
-		LOGGER.info("Executing GET API on /products/{id}");
+	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
+	public Product getProductById(@PathVariable final String id) throws ReviewableException {
+		LOGGER.info("Executing GET API on /v1.0/product/{id}");
 		LOGGER.debug("Requested product ID: {}", id);
 		try {
 			return productService.getProductById(id);
@@ -96,21 +96,10 @@ public class ProductController {
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) {
-		LOGGER.info("Executing POST API on /products");
+		LOGGER.info("Executing POST API on /v1.0/product");
 		LOGGER.debug("Incoming Product details: {}", product);
 		Product createdProduct = productService.createProduct(product);
 		LOGGER.info("Product created successfully! Returning response to user");
 		return new ResponseEntity<Product>(createdProduct, HttpStatus.CREATED);
-	}
-
-	/**
-	 * REST API for PING test
-	 * 
-	 * @return A String that says SUCCESS
-	 */
-	@RequestMapping(path = "/ping", method = RequestMethod.GET)
-	public ResponseEntity<String> ping() {
-		LOGGER.info("Executing PING GET API on /products/ping");
-		return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 	}
 }
