@@ -3,6 +3,8 @@
  */
 package com.craft.reviewable.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +28,8 @@ import com.craft.reviewable.service.ReviewService;
 @RequestMapping("reviews")
 public class ReviewController {
 
+	public static final Logger LOGGER = LoggerFactory.getLogger(com.craft.reviewable.controller.ReviewController.class);
+	
 	@Autowired
 	private ReviewService reviewService;
 
@@ -36,10 +40,13 @@ public class ReviewController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Page<Review>> getAllReviews(@RequestParam(value = "pid", required = true) String pid,
 			Pageable pageable) throws ReviewableException {
+		LOGGER.info("Executing GET API on /review/{pid}");
+		LOGGER.debug("Requested product ID: {}", pid);
 		try {
 			Page<Review> productReviews = reviewService.listProductReviews(pid, pageable);
 			return new ResponseEntity<Page<Review>>(productReviews, HttpStatus.CREATED);
 		} catch (ReviewableException ex) {
+			LOGGER.info("Throwing the exception customized error");
 			throw ex;
 		}
 
@@ -47,11 +54,13 @@ public class ReviewController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Review> addReview(@RequestBody Review review) throws ReviewableException {
-
+		LOGGER.info("Executing POST API on /reviews");
+		LOGGER.debug("New review details received by REST API: {}", review);
 		try {
 			Review addedReview = reviewService.addReview(review);
 			return new ResponseEntity<Review>(addedReview, HttpStatus.CREATED);
 		} catch (ReviewableException ex) {
+			LOGGER.info("Throwing the exception customized error");
 			throw ex;
 		}
 

@@ -2,6 +2,8 @@ package com.craft.reviewable.service.impl;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +20,9 @@ import com.craft.reviewable.service.ReviewService;
 @Component
 public class ReviewServiceImpl implements ReviewService {
 
+	public static final Logger LOGGER = LoggerFactory
+			.getLogger(com.craft.reviewable.service.impl.ReviewServiceImpl.class);
+
 	@Autowired
 	ReviewRepository reviewRepository;
 
@@ -26,14 +31,20 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public Page<Review> listProductReviews(String productId, Pageable pageable) throws ReviewableException {
+
+		LOGGER.info("Fetching all reviews for a given product ID from DB");
+		LOGGER.debug("Fetching all reviews for product: {}", productId);
+
 		Page<Review> reviewsPage = reviewRepository.findByProductId(productId, pageable);
 
 		if (reviewsPage == null || reviewsPage.getContent().size() == 0) {
-			// Product not found
+			LOGGER.info("Product with the given product ID is not found in DB");
+			LOGGER.info("Throwing a customized error message");
 			ReviewableError error = new ReviewableError();
 			error.setErrorCode("R-4001");
-			error.setErrorDescription("Product ID entered is invalid");
+			error.setErrorDescription("Could not fetch reviews for the product. Product ID entered is invalid.");
 			ReviewableException ex = new ReviewableException(error);
+			LOGGER.debug("Exception stacktrace: {}", ex);
 			throw ex;
 		}
 
@@ -43,26 +54,37 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public Review addReview(Review review) throws ReviewableException {
 
+		LOGGER.info("Adding a new review for the given product");
+		LOGGER.debug("Review details: {}", review);
+
 		Product product = productRepository.findOne(review.getProductId());
 
 		if (product == null) {
-			// Product not found
+			LOGGER.info("Product with the given product ID is not found in DB. Review will not be added");
+			LOGGER.info("Throwing a customized error message");
 			ReviewableError error = new ReviewableError();
 			error.setErrorCode("R-4001");
-			error.setErrorDescription("Product ID entered is invalid");
+			error.setErrorDescription("Product ID entered is invalid. Review not added.");
 			ReviewableException ex = new ReviewableException(error);
+			LOGGER.debug("Exception stacktrace: {}", ex);
 			throw ex;
 		}
 
-		if (review.getDate() == null)
+		if (review.getDate() == null) {
+			LOGGER.info("Date not set in the review. Setting date to current system date");
 			review.setDate(new Date());
+		}
 
 		Review addedReview = reviewRepository.save(review);
+		LOGGER.info("Review saved to the DB");
 
+		LOGGER.info("Updating the average rating of the product based on the latest review");
+		LOGGER.debug("Product details before new rating calculation: {}", product);
 		product.setAverageRating(product.calculateNewAverageRating(addedReview.getRating()));
+		Product updatedProduct = productRepository.save(product);
 
-		productRepository.save(product);
-
+		LOGGER.info("New rating details updated to the product");
+		LOGGER.debug("Product details with new rating calculation: {}", updatedProduct);
 		return addedReview;
 	}
 
