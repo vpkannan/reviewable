@@ -14,7 +14,7 @@ public class ReviewsTest {
 		Date date = new Date();
 		Product p = new Product("prod1", "IPhone X", 3.0, 1, 1, 1, 1, 1);
 		Review r1 = new Review("review1", "prod1", 5, "Good product", "Excellent design", "John Doe", date);
-		Review r2 = new Review("review2", "prod1", 5, "Good product", "Excellent design", "John Doe", date);
+		Review r2 = new Review("review2", "prod1", 5, "Not a good product", "Needs improvement", "Jane Doe", date);
 		Review r3 = new Review("review1", "prod1", 5, "Good product", "Excellent design", "John Doe", date);
 
 		assertEquals(r1, r3);
