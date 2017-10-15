@@ -13,6 +13,10 @@ import com.craft.reviewable.exception.ReviewableException;
 import com.craft.reviewable.repository.ProductRepository;
 import com.craft.reviewable.service.ProductService;
 
+/**
+ * @author Vignesh
+ *
+ */
 @Component
 public class ProductServiceImpl implements ProductService {
 
@@ -22,12 +26,22 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductRepository productRepository;
 
+	/**
+	 * Get all Products
+	 *
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Product> getAllProducts() {
 		LOGGER.info("Fetching all products from DB");
 		return (List<Product>) productRepository.findAll();
 	}
 
+	/**
+	 * Get Product by ID
+	 *
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Product getProductById(String id) throws ReviewableException {
 		LOGGER.info("Fetching product details from DB based on ID provided");
@@ -47,6 +61,11 @@ public class ProductServiceImpl implements ProductService {
 		return product;
 	}
 
+	/**
+	 * Create Product
+	 *
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Product createProduct(Product product) {
 		LOGGER.info("Attempting to add new product to the DB");

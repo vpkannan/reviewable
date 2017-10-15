@@ -21,7 +21,7 @@ import com.craft.reviewable.exception.ReviewableException;
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
 	public static final Logger LOGGER = LoggerFactory
-			.getLogger(com.craft.reviewable.controller.ProductController.class);
+			.getLogger(com.craft.reviewable.controller.ControllerExceptionHandler.class);
 
 	@ExceptionHandler(ReviewableException.class)
 	@ResponseBody
@@ -31,16 +31,4 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(ex.getError(), HttpStatus.BAD_REQUEST);
 	}
 
-	// @ExceptionHandler({ RepositoryConstraintViolationException.class })
-	// public ResponseEntity<ReviewableError> handleAccessDeniedException(Exception
-	// ex, WebRequest request) {
-	// RepositoryConstraintViolationException nevEx =
-	// (RepositoryConstraintViolationException) ex;
-	//
-	// String errors = nevEx.getErrors().getAllErrors().stream().map(p ->
-	// p.toString())
-	// .collect(Collectors.joining("\n"));
-	//
-	// return new ResponseEntity<ReviewableError>(errors, HttpStatus.BAD_REQUEST);
-	// }
 }

@@ -29,6 +29,11 @@ public class ReviewServiceImpl implements ReviewService {
 	@Autowired
 	ProductRepository productRepository;
 
+	/**
+	 * Get all Reviews for a Product
+	 *
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Page<Review> listProductReviews(String productId, Pageable pageable) throws ReviewableException {
 
@@ -51,6 +56,11 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewsPage;
 	}
 
+	/**
+	 * Add a new Review for a Product
+	 *
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Review addReview(Review review) throws ReviewableException {
 

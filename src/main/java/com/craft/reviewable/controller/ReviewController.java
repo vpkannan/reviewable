@@ -29,7 +29,7 @@ import com.craft.reviewable.service.ReviewService;
 public class ReviewController {
 
 	public static final Logger LOGGER = LoggerFactory.getLogger(com.craft.reviewable.controller.ReviewController.class);
-	
+
 	@Autowired
 	private ReviewService reviewService;
 
@@ -37,6 +37,16 @@ public class ReviewController {
 		this.reviewService = reviewService;
 	}
 
+	/**
+	 * REST API to get all reviews for a given product based on the Product ID
+	 * 
+	 * @param pid
+	 *            The product ID to look up its reviews
+	 * @param pageable
+	 *            The pagination attributes
+	 * @return The Page of Review objects filtered based on Pageable
+	 * @throws ReviewableException
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Page<Review>> getAllReviews(@RequestParam(value = "pid", required = true) String pid,
 			Pageable pageable) throws ReviewableException {
@@ -52,6 +62,14 @@ public class ReviewController {
 
 	}
 
+	/**
+	 * REST API to add review to a product
+	 * 
+	 * @param review
+	 *            The Review object to be added
+	 * @return The created Review object along with the auto generated ID
+	 * @throws ReviewableException
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Review> addReview(@RequestBody Review review) throws ReviewableException {
 		LOGGER.info("Executing POST API on /reviews");
