@@ -10,20 +10,15 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.annotation.DirtiesContext;
 
 import com.craft.reviewable.domain.Review;
 import com.craft.reviewable.service.ReviewService;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@DirtiesContext
 public class ReviewControllerTest {
 
 	@Test
