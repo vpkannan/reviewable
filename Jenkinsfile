@@ -8,7 +8,8 @@ node {
 		
 		stage 'Publish Test Results'
 			println "Publishing test results to Sonarqube"
-			sh './gradlew jacocoTestReport sonarqube'
+			sh './gradlew jacocoTestReport'
+			sh './gradlew sonarqube -Dsonar.branch=env.BRANCH_NAME'
 		
 		stage 'Build Docker Image' 
 			sh './gradlew buildDocker'
