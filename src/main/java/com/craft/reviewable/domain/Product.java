@@ -36,6 +36,14 @@ public class Product {
 		this.fiveStar = fiveStar;
 	}
 
+	/**
+	 * Calculate the average rating for the product when a new review is added,
+	 * based on the number of one, two, three, four and five star reviews
+	 * 
+	 * @param rating
+	 *            The rating of the new review added to the product
+	 * @return double value representing the new average rating for the product
+	 */
 	public double calculateNewAverageRating(int rating) {
 
 		if (rating == 1)

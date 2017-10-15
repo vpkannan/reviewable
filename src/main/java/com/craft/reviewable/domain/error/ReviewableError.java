@@ -1,4 +1,4 @@
-package com.craft.reviewable.domain;
+package com.craft.reviewable.domain.error;
 
 public class ReviewableError {
 
