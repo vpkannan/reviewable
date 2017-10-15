@@ -5,7 +5,11 @@ node {
 			sh 'chmod 755 ./gradlew'
 			sh './gradlew clean build'
 			println "Current build result: " + currentBuild?.result
-			
+		
+		stage 'Publish Test Results'
+			println "Publishing test results to Sonarqube"
+			sh './graldew jacocoTestReport sonarqube'
+		
 		stage 'Build Docker Image' 
 			sh './gradlew buildDocker'
 			//app = docker.build("vpkannan/reviewable")
