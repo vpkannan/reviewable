@@ -19,11 +19,17 @@ import com.craft.reviewable.domain.Product;
 public class ProductValidator implements Validator {
 	public static final Logger LOGGER = LoggerFactory.getLogger(com.craft.reviewable.validator.ProductValidator.class);
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return Product.class.equals(clazz);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void validate(Object target, Errors errors) {
 		Product product = (Product) target;

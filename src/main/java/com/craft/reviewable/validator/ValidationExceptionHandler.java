@@ -28,6 +28,9 @@ public class ValidationExceptionHandler extends ResponseEntityExceptionHandler {
 	public static final Logger LOGGER = LoggerFactory
 			.getLogger(com.craft.reviewable.validator.ValidationExceptionHandler.class);
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {

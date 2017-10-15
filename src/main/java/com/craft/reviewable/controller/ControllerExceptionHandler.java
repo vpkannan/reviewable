@@ -23,6 +23,13 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 	public static final Logger LOGGER = LoggerFactory
 			.getLogger(com.craft.reviewable.controller.ControllerExceptionHandler.class);
 
+	/**
+	 * Exception handler for the ReviewableException thrown by REST API
+	 * 
+	 * @param ex
+	 *            The ReviewableException object constructed based on the error
+	 * @return The human readable error object returned back to the user
+	 */
 	@ExceptionHandler(ReviewableException.class)
 	@ResponseBody
 	public ResponseEntity<ReviewableError> handleReviewableBadRequestException(final ReviewableException ex) {
