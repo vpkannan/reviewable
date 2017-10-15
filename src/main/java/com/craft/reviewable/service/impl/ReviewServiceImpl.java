@@ -30,6 +30,19 @@ public class ReviewServiceImpl implements ReviewService {
 	ProductRepository productRepository;
 
 	/**
+	 * Constructor to initiate the repositories. Used in unit tests.
+	 * 
+	 * @param reviewRepository
+	 *            The review repository
+	 * @param productRepository
+	 *            The product repository
+	 */
+	public ReviewServiceImpl(ReviewRepository reviewRepository, ProductRepository productRepository) {
+		this.reviewRepository = reviewRepository;
+		this.productRepository = productRepository;
+	}
+
+	/**
 	 * Get all Reviews for a Product
 	 *
 	 * {@inheritDoc}

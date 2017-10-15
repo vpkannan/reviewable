@@ -54,7 +54,7 @@ public class ReviewController {
 		LOGGER.debug("Requested product ID: {}", pid);
 		try {
 			Page<Review> productReviews = reviewService.listProductReviews(pid, pageable);
-			return new ResponseEntity<Page<Review>>(productReviews, HttpStatus.CREATED);
+			return new ResponseEntity<Page<Review>>(productReviews, HttpStatus.OK);
 		} catch (ReviewableException ex) {
 			LOGGER.info("Throwing the exception customized error");
 			throw ex;
