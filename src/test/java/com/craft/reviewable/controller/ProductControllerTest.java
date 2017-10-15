@@ -35,10 +35,23 @@ public class ProductControllerTest {
 		Product product = new Product();
 		product.setId("abc1234");
 		product.setName("IPhone 8");
+		product.setAverageRating(3.0);
+		product.setFiveStar(1);
+		product.setFourStar(1);
+		product.setThreeStar(1);
+		product.setTwoStar(1);
+		product.setOneStar(1);
+
 		when(productService.getProductById("abc1234")).thenReturn(product);
 		ProductController controller = new ProductController(productService);
 		ResponseEntity<Product> retrievedProduct = controller.getProductById("abc1234");
 		assertEquals(retrievedProduct.getBody().getId(), "abc1234");
+		assertEquals(retrievedProduct.getBody().getAverageRating(), product.getAverageRating(), 0.0);
+		assertEquals(retrievedProduct.getBody().getOneStar(), product.getOneStar());
+		assertEquals(retrievedProduct.getBody().getTwoStar(), product.getTwoStar());
+		assertEquals(retrievedProduct.getBody().getThreeStar(), product.getThreeStar());
+		assertEquals(retrievedProduct.getBody().getFourStar(), product.getFourStar());
+		assertEquals(retrievedProduct.getBody().getFiveStar(), product.getFiveStar());
 		assertEquals(retrievedProduct.getStatusCode(), HttpStatus.OK);
 	}
 
