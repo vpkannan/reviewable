@@ -1,6 +1,6 @@
 package com.craft.reviewable.exception;
 
-import com.craft.reviewable.domain.ReviewableError;
+import com.craft.reviewable.domain.error.ReviewableError;
 
 public class ReviewableException extends Exception {
 

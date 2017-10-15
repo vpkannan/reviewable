@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.craft.reviewable.domain.Product;
 import com.craft.reviewable.domain.Review;
-import com.craft.reviewable.domain.ReviewableError;
+import com.craft.reviewable.domain.error.ReviewableError;
 import com.craft.reviewable.exception.ReviewableException;
 import com.craft.reviewable.repository.ProductRepository;
 import com.craft.reviewable.repository.ReviewRepository;

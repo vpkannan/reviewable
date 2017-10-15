@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.craft.reviewable.domain.ReviewableError;
+import com.craft.reviewable.domain.error.ReviewableError;
 import com.craft.reviewable.exception.ReviewableException;
 
 @ControllerAdvice
