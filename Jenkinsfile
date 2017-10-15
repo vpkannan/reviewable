@@ -12,7 +12,7 @@ node {
 			if(isMasterBranch()) {
 				sh './gradlew sonarqube'
 			} else {
-				sh './gradlew sonarqube -Dsonar.projectName=Reviewable-{$env.BRANCH_NAME}' 
+				sh './gradlew sonarqube -Dsonar.projectName=Reviewable-$env.BRANCH_NAME' 
 			}
 		
 		stage 'Build Docker Image' 
