@@ -4,18 +4,24 @@ buildscript {
     }
     dependencies {
         classpath('org.springframework.boot:spring-boot-gradle-plugin:1.5.7.RELEASE')
-// tag::build[]
         classpath('se.transmode.gradle:gradle-docker:1.2')
-// end::build[]
+        classpath('org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.1-rc3')
+
     }
 }
+
+plugins {
+	id "jacoco" 
+	id "org.sonarqube" version "2.1-rc3"
+}
+
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
-
 apply plugin: 'docker'
+
 
 
 group = 'vpkannan'
@@ -66,4 +72,34 @@ dependencies {
     	"org.springframework.boot:spring-boot-starter-test"
     ) 
 }
+
+// SonarQube configuration
+
+sonarqube {
+	properties {
+		property "sonar.projectName", "Reviewable"
+		property "sonar.projectVersion", "1.0"
+		property "sonar.host.url", "http://ec2-34-215-128-136.us-west-2.compute.amazonaws.com:9000" 
+		property "sonar.host.login", "admin" 
+		property "sonar.host.password", "admin"
+		property "sonar.java.coveragePlugin", "jacoco"
+		property "sonar.jacoco.reportPaths", "${buildDir}/jacoco/test.exec" 
+		
+	} 
+}
+
+// Jacoco configuration
+jacoco {
+	toolVersion = "0.7.6.201602180812"
+	reportsDir = file("${buildDir}/reports/coverage") 
+}
+
+jacocoTestReport {
+	group = "Reporting"
+	reports {
+		xml.enabled true
+		html.destination "${buildDir}/reports/coverage/html" 
+	} 
+}
+
 
