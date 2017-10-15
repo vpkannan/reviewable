@@ -61,9 +61,9 @@ public class ProductController {
 	 * @return List of products
 	 */
 	@RequestMapping(path = "/all", method = RequestMethod.GET)
-	public List<Product> getAllProducts() {
+	public ResponseEntity<List<Product>> getAllProducts() {
 		LOGGER.info("Executing GET API on /v1.0/product/all");
-		return productService.getAllProducts();
+		return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
 	}
 
 	/**
@@ -75,11 +75,11 @@ public class ProductController {
 	 * @throws ReviewableException
 	 */
 	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
-	public Product getProductById(@PathVariable final String id) throws ReviewableException {
+	public ResponseEntity<Product> getProductById(@PathVariable final String id) throws ReviewableException {
 		LOGGER.info("Executing GET API on /v1.0/product/{id}");
 		LOGGER.debug("Requested product ID: {}", id);
 		try {
-			return productService.getProductById(id);
+			return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
 		} catch (ReviewableException ex) {
 			LOGGER.info("Throwing the exception customized error");
 			throw ex;

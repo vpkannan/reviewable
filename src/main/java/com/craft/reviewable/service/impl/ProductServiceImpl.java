@@ -27,6 +27,16 @@ public class ProductServiceImpl implements ProductService {
 	ProductRepository productRepository;
 
 	/**
+	 * Constructor initializing the repository. Used for unit tests
+	 * 
+	 * @param productRepository
+	 *            The product repository
+	 */
+	public ProductServiceImpl(ProductRepository productRepository) {
+		this.productRepository = productRepository;
+	}
+
+	/**
 	 * Get all Products
 	 *
 	 * {@inheritDoc}
