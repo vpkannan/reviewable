@@ -59,7 +59,7 @@ public class Product {
 		else
 			this.setFiveStar(this.getFiveStar() + 1);
 
-		double newAverageRating = 0.0;
+		double newAverageRating;
 		newAverageRating = (1.0 * oneStar + 2.0 * twoStar + 3.0 * threeStar + 4.0 * fourStar + 5.0 * fiveStar)
 				/ ((double) (oneStar + twoStar + threeStar + fourStar + fiveStar));
 
