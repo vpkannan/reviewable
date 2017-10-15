@@ -20,6 +20,7 @@ public class ReviewableTests {
 	public void testGreeting() throws Exception {
 		int n = 5;
 		Product p = new Product();
+		p.setName("Iphone 8");
 		assertEquals(5, n);
 	}
 
