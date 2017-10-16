@@ -59,11 +59,18 @@ public class ProductController {
 	 * REST API to get all products
 	 * 
 	 * @return List of products
+	 * @throws ReviewableException
 	 */
 	@RequestMapping(path = "/all", method = RequestMethod.GET)
-	public ResponseEntity<List<Product>> getAllProducts() {
+	public ResponseEntity<List<Product>> getAllProducts() throws ReviewableException {
 		LOGGER.info("Executing GET API on /v1.0/product/all");
-		return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
+		try {
+			return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
+		} catch (ReviewableException ex) {
+			LOGGER.info("Throwing the customized error");
+			throw ex;
+		}
+
 	}
 
 	/**
@@ -81,7 +88,7 @@ public class ProductController {
 		try {
 			return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
 		} catch (ReviewableException ex) {
-			LOGGER.info("Throwing the exception customized error");
+			LOGGER.info("Throwing the customized error");
 			throw ex;
 		}
 	}
@@ -100,6 +107,6 @@ public class ProductController {
 		LOGGER.debug("Incoming Product details: {}", product);
 		Product createdProduct = productService.createProduct(product);
 		LOGGER.info("Product created successfully! Returning response to user");
-		return new ResponseEntity<Product>(createdProduct, HttpStatus.CREATED);
+		return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
 	}
 }

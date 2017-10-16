@@ -40,11 +40,24 @@ public class ProductServiceImpl implements ProductService {
 	 * Get all Products
 	 *
 	 * {@inheritDoc}
+	 * 
+	 * @throws ReviewableException
 	 */
 	@Override
-	public List<Product> getAllProducts() {
+	public List<Product> getAllProducts() throws ReviewableException {
 		LOGGER.info("Fetching all products from DB");
-		return (List<Product>) productRepository.findAll();
+		List<Product> products = (List<Product>) productRepository.findAll();
+		if (products.isEmpty()) {
+			LOGGER.info("No Products found in DB");
+			LOGGER.info("Returning a customized error response");
+			ReviewableError error = new ReviewableError();
+			error.setErrorCode("R-4004");
+			error.setErrorDescription("No Products present in the system");
+			ReviewableException ex = new ReviewableException(error);
+			LOGGER.debug("Exception stacktrace: {}", ex);
+			throw ex;
+		}
+		return products;
 	}
 
 	/**

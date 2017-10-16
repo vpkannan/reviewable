@@ -3,6 +3,8 @@ package com.craft.reviewable.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
@@ -57,7 +59,7 @@ public class Product {
 		else
 			this.setFiveStar(this.getFiveStar() + 1);
 
-		double newAverageRating = 0.0;
+		double newAverageRating;
 		newAverageRating = (1.0 * oneStar + 2.0 * twoStar + 3.0 * threeStar + 4.0 * fourStar + 5.0 * fiveStar)
 				/ ((double) (oneStar + twoStar + threeStar + fourStar + fiveStar));
 
@@ -130,53 +132,31 @@ public class Product {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int PRIME = 31;
 		int result = 1;
 		long temp;
 		temp = Double.doubleToLongBits(averageRating);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + fiveStar;
-		result = prime * result + fourStar;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + oneStar;
-		result = prime * result + threeStar;
-		result = prime * result + twoStar;
+		result = PRIME * result + (int) (temp ^ (temp >>> 32));
+		result = PRIME * result + fiveStar;
+		result = PRIME * result + fourStar;
+		result = PRIME * result + ((id == null) ? 0 : id.hashCode());
+		result = PRIME * result + ((name == null) ? 0 : name.hashCode());
+		result = PRIME * result + oneStar;
+		result = PRIME * result + threeStar;
+		result = PRIME * result + twoStar;
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (obj == this)
 			return true;
-		if (obj == null)
+		if (!(obj instanceof Product))
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Product other = (Product) obj;
-		if (Double.doubleToLongBits(averageRating) != Double.doubleToLongBits(other.averageRating))
-			return false;
-		if (fiveStar != other.fiveStar)
-			return false;
-		if (fourStar != other.fourStar)
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (oneStar != other.oneStar)
-			return false;
-		if (threeStar != other.threeStar)
-			return false;
-		if (twoStar != other.twoStar)
-			return false;
-		return true;
+		Product p = (Product) obj;
+		return new EqualsBuilder().append(id, p.id).append(name, p.name).append(averageRating, p.averageRating)
+				.append(oneStar, p.oneStar).append(twoStar, p.twoStar).append(threeStar, p.threeStar)
+				.append(fourStar, p.fourStar).append(fiveStar, p.fiveStar).isEquals();
 	}
 
 	@Override

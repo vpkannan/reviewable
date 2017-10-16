@@ -11,8 +11,9 @@ public interface ProductService {
 	 * Retrieve all products from the database
 	 * 
 	 * @return List of all Product entries from the DB
+	 * @throws ReviewableException
 	 */
-	public List<Product> getAllProducts();
+	public List<Product> getAllProducts() throws ReviewableException;
 
 	/**
 	 * Retrieve product details based on Product ID

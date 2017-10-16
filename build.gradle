@@ -66,6 +66,7 @@ dependencies {
     compile(
     	"org.springframework.boot:spring-boot-starter-data-rest",
     	"org.springframework.boot:spring-boot-starter-data-mongodb",
+    	"commons-lang:commons-lang:2.2",
     	"javax.persistence:persistence-api:1.0"
     ) 
     testCompile(

@@ -1,6 +1,7 @@
 package com.craft.reviewable.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -40,6 +41,7 @@ public class ReviewControllerTest {
 
 		Review mockedReview = new Review();
 		mockedReview.setId("abc1234");
+		mockedReview.setProductId("xyz4321");
 		mockedReview.setRating(5);
 		mockedReview.setReviewTitle("Good Phone");
 		mockedReview.setReviewText("Good Phone. Nice Camera");
@@ -47,6 +49,7 @@ public class ReviewControllerTest {
 		mockedReview.setDate(new Date());
 
 		Review review = new Review();
+		review.setProductId("xyz4321");
 		review.setRating(5);
 		review.setReviewTitle("Good Phone");
 		review.setReviewText("Good Phone. Nice Camera");
@@ -57,10 +60,12 @@ public class ReviewControllerTest {
 		ReviewController controller = new ReviewController(reviewService);
 		ResponseEntity<Review> addedReview = controller.addReview(review);
 		assertEquals(addedReview.getBody().getId(), "abc1234");
+		assertEquals(addedReview.getBody().getProductId(), review.getProductId());
 		assertEquals(addedReview.getBody().getReviewTitle(), review.getReviewTitle());
 		assertEquals(addedReview.getBody().getReviewText(), review.getReviewText());
 		assertEquals(addedReview.getBody().getUserName(), review.getUserName());
 		assertEquals(addedReview.getBody().getRating(), review.getRating());
+		assertNotNull(addedReview.getBody().getDate());
 		assertEquals(addedReview.getStatusCode(), HttpStatus.CREATED);
 	}
 
