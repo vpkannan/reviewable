@@ -85,7 +85,7 @@ sonarqube {
 		property "sonar.host.password", "admin"
 		property "sonar.java.coveragePlugin", "jacoco"
 		property "sonar.jacoco.reportPaths", "${buildDir}/jacoco/test.exec"
-		property "sonar.exclusions", "Application.java" 
+		property "sonar.exclusions", "**/Application.java" 
 		
 	} 
 }
