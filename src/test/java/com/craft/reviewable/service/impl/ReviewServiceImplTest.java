@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.craft.reviewable.domain.Product;
 import com.craft.reviewable.domain.Review;
+import com.craft.reviewable.exception.ReviewableException;
 import com.craft.reviewable.repository.ProductRepository;
 import com.craft.reviewable.repository.ReviewRepository;
 import com.craft.reviewable.service.ReviewService;
@@ -43,7 +44,7 @@ public class ReviewServiceImplTest {
 	}
 
 	@Test
-	public void testCreateProduct() throws Exception {
+	public void testAddReview() throws Exception {
 		ReviewRepository reviewRepository = mock(ReviewRepository.class);
 		ProductRepository productRepository = mock(ProductRepository.class);
 		Review reviewRequest = new Review("", "prod1", 5, "Good product", "Excellent design", "John Doe", null);
@@ -61,6 +62,33 @@ public class ReviewServiceImplTest {
 
 		assertNotNull(createdReview.getId());
 		assertNotNull(createdReview.getDate());
+
+	}
+
+	@Test(expected = ReviewableException.class)
+	public void testListProductReviewsForInvalidProduct() throws Exception {
+		ReviewRepository reviewRepository = mock(ReviewRepository.class);
+		ProductRepository productRepository = mock(ProductRepository.class);
+
+		List<Review> reviews = new ArrayList<>();
+		Page<Review> page = new PageImpl<>(reviews, null, 0);
+
+		when(reviewRepository.findByProductId(any(String.class), any(Pageable.class))).thenReturn(page);
+		ReviewService reviewService = new ReviewServiceImpl(reviewRepository, productRepository);
+		reviewService.listProductReviews("prod1", null);
+	}
+
+	@Test(expected = ReviewableException.class)
+	public void testAddReviewForInvalidProject() throws Exception {
+		ReviewRepository reviewRepository = mock(ReviewRepository.class);
+		ProductRepository productRepository = mock(ProductRepository.class);
+		Review review = new Review("", "prod1", 5, "Good product", "Excellent design", "John Doe", null);
+
+		when(productRepository.findOne(any(String.class))).thenReturn(null);
+
+		ReviewService reviewService = new ReviewServiceImpl(reviewRepository, productRepository);
+
+		reviewService.addReview(review);
 
 	}
 }
