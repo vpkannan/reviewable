@@ -56,16 +56,15 @@ public class ReviewServiceImpl implements ReviewService {
 		Page<Review> reviewsPage = reviewRepository.findByProductId(productId, pageable);
 
 		if (reviewsPage == null || reviewsPage.getContent().isEmpty()) {
-			LOGGER.info("Product with the given product ID is not found in DB");
+			LOGGER.info("Reviews for Product with the given product ID is not found in DB");
 			LOGGER.info("Throwing a customized error message");
 			ReviewableError error = new ReviewableError();
 			error.setErrorCode("R-4002");
-			error.setErrorDescription("Could not fetch reviews for the product. Invalid data");
+			error.setErrorDescription("Reviews for Product with the given product ID is not found");
 			ReviewableException ex = new ReviewableException(error);
 			LOGGER.debug("Exception stacktrace: {}", ex);
 			throw ex;
 		}
-
 		return reviewsPage;
 	}
 
@@ -87,7 +86,7 @@ public class ReviewServiceImpl implements ReviewService {
 			LOGGER.info("Throwing a customized error message");
 			ReviewableError error = new ReviewableError();
 			error.setErrorCode("R-4001");
-			error.setErrorDescription("Product ID entered is invalid. Review not added.");
+			error.setErrorDescription("Product ID entered is invalid. Review not added");
 			ReviewableException ex = new ReviewableException(error);
 			LOGGER.debug("Exception stacktrace: {}", ex);
 			throw ex;

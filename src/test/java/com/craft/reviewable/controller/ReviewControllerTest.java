@@ -18,6 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.craft.reviewable.domain.Review;
+import com.craft.reviewable.domain.error.ReviewableError;
+import com.craft.reviewable.exception.ReviewableException;
 import com.craft.reviewable.service.ReviewService;
 
 public class ReviewControllerTest {
@@ -67,6 +69,24 @@ public class ReviewControllerTest {
 		assertEquals(addedReview.getBody().getRating(), review.getRating());
 		assertNotNull(addedReview.getBody().getDate());
 		assertEquals(addedReview.getStatusCode(), HttpStatus.CREATED);
+	}
+
+	@Test(expected = ReviewableException.class)
+	public void testGetReviewsForProductsErrorScenario() throws Exception {
+		ReviewService reviewService = mock(ReviewService.class);
+		when(reviewService.listProductReviews(any(String.class), any(Pageable.class)))
+				.thenThrow(new ReviewableException(new ReviewableError("ERROR1", "ERROR_OCCURRED")));
+		ReviewController controller = new ReviewController(reviewService);
+		controller.getReviewsForProduct("abc123", null);
+	}
+
+	@Test(expected = ReviewableException.class)
+	public void testAddReviewsErrorScenario() throws Exception {
+		ReviewService reviewService = mock(ReviewService.class);
+		when(reviewService.addReview(any(Review.class)))
+				.thenThrow(new ReviewableException(new ReviewableError("ERROR1", "ERROR_OCCURRED")));
+		ReviewController controller = new ReviewController(reviewService);
+		controller.addReview(new Review());
 	}
 
 }

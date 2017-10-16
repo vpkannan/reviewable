@@ -2,6 +2,7 @@ package com.craft.reviewable.service.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.craft.reviewable.domain.Product;
+import com.craft.reviewable.exception.ReviewableException;
 import com.craft.reviewable.repository.ProductRepository;
 import com.craft.reviewable.service.ProductService;
 
@@ -54,4 +56,22 @@ public class ProductServiceImplTest {
 		assertNotNull(createdProduct.getId());
 		assertEquals(createdProduct.getName(), product.getName());
 	}
+
+	@Test(expected = ReviewableException.class)
+	public void testGetAllProductsErrorScenario() throws Exception {
+		ProductRepository productRepository = mock(ProductRepository.class);
+		List<Product> products = new ArrayList<>();
+		when(productRepository.findAll()).thenReturn(products);
+		ProductService productService = new ProductServiceImpl(productRepository);
+		productService.getAllProducts();
+	}
+
+	@Test(expected = ReviewableException.class)
+	public void testGetProductByIdErrorScenario() throws Exception {
+		ProductRepository productRepository = mock(ProductRepository.class);
+		when(productRepository.findOne(any(String.class))).thenReturn(null);
+		ProductService productService = new ProductServiceImpl(productRepository);
+		productService.getProductById("prod1");
+	}
+
 }
