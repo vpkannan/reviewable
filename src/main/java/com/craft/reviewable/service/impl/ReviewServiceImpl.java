@@ -65,7 +65,6 @@ public class ReviewServiceImpl implements ReviewService {
 			LOGGER.debug("Exception stacktrace: {}", ex);
 			throw ex;
 		}
-
 		return reviewsPage;
 	}
 

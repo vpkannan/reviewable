@@ -7,7 +7,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
-public class ReviewsTest {
+public class ReviewTest {
 	@Test
 	public void testProductEquals() throws Exception {
 
