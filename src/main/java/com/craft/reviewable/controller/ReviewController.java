@@ -3,6 +3,8 @@
  */
 package com.craft.reviewable.controller;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.craft.reviewable.domain.Review;
 import com.craft.reviewable.exception.ReviewableException;
 import com.craft.reviewable.service.ReviewService;
+import com.craft.reviewable.validator.ReviewValidator;
 
 /**
  * @author Vignesh
@@ -33,8 +38,19 @@ public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
 
+	@Autowired
+	private ReviewValidator reviewValidator;
+
 	public ReviewController(ReviewService reviewService) {
 		this.reviewService = reviewService;
+	}
+
+	/**
+	 * Initiate validators for the Review entity
+	 */
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.setValidator(reviewValidator);
 	}
 
 	/**
@@ -71,7 +87,7 @@ public class ReviewController {
 	 * @throws ReviewableException
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Review> addReview(@RequestBody Review review) throws ReviewableException {
+	public ResponseEntity<Review> addReview(@Valid @RequestBody Review review) throws ReviewableException {
 		LOGGER.info("Executing POST API on /v1.0/review");
 		LOGGER.debug("New review details received by REST API: {}", review);
 		try {
