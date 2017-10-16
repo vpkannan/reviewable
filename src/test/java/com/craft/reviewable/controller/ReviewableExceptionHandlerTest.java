@@ -20,6 +20,14 @@ public class ReviewableExceptionHandlerTest {
 		assertEquals(error.getBody().getErrorCode(), "ERROR1");
 		assertEquals(error.getBody().getErrorDescription(), "FATAL_ERROR");
 		assertEquals(error.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Test
+	public void testHandleExceptionHandler() {
+		ReviewableExceptionHandler handler = new ReviewableExceptionHandler();
+		ResponseEntity<ReviewableError> error = handler.handleException(new Exception());
+
+		assertEquals(error.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
 
