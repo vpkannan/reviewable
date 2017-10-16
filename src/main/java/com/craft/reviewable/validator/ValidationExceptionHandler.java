@@ -45,7 +45,7 @@ public class ValidationExceptionHandler extends ResponseEntityExceptionHandler {
 		List<ReviewableError> reviewableErrors = new ArrayList<>();
 
 		for (ObjectError error : errors) {
-			ReviewableError reviewableError = new ReviewableError("R-4000", error.getDefaultMessage());
+			ReviewableError reviewableError = new ReviewableError(error.getCode(), error.getDefaultMessage());
 			reviewableErrors.add(reviewableError);
 		}
 
