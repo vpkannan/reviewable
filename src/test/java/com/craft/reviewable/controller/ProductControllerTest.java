@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.craft.reviewable.domain.Product;
+import com.craft.reviewable.domain.error.ReviewableError;
+import com.craft.reviewable.exception.ReviewableException;
 import com.craft.reviewable.service.ProductService;
 
 public class ProductControllerTest {
@@ -68,6 +70,25 @@ public class ProductControllerTest {
 		ResponseEntity<Product> createdProduct = controller.createProduct(product);
 		assertEquals(createdProduct.getBody().getName(), product.getName());
 		assertEquals(createdProduct.getStatusCode(), HttpStatus.CREATED);
+	}
+
+	@Test(expected = ReviewableException.class)
+	public void testGetAllProductsErrorScenario() throws Exception {
+		ProductService productService = mock(ProductService.class);
+		when(productService.getAllProducts())
+				.thenThrow(new ReviewableException(new ReviewableError("ERROR1", "ERROR_OCCURRED")));
+		ProductController controller = new ProductController(productService);
+		controller.getAllProducts();
+	}
+
+	@Test(expected = ReviewableException.class)
+	public void testGetProductByIdErrorScenario() throws Exception {
+		ProductService productService = mock(ProductService.class);
+		when(productService.getProductById("prod1"))
+				.thenThrow(new ReviewableException(new ReviewableError("ERROR1", "ERROR_OCCURRED")));
+		ProductController controller = new ProductController(productService);
+		controller.getProductById("prod1");
+
 	}
 
 }
