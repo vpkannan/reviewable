@@ -35,7 +35,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<ReviewableError> handleReviewableBadRequestException(final ReviewableException ex) {
 		LOGGER.info("ControllerAdvice returning error message to user");
 		LOGGER.debug("Error returned: {}", ex.getError());
-		return new ResponseEntity<>(ex.getError(), HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(ex.getError(), HttpStatus.NOT_FOUND);
 	}
 
 }
