@@ -75,7 +75,8 @@ public class ReviewControllerTest {
 	public void testGetReviewsForProductsErrorScenario() throws Exception {
 		ReviewService reviewService = mock(ReviewService.class);
 		when(reviewService.listProductReviews(any(String.class), any(Pageable.class)))
-				.thenThrow(new ReviewableException(new ReviewableError("ERROR1", "ERROR_OCCURRED")));
+				.thenThrow(new ReviewableException(new ReviewableError("ERROR1", "ERROR_OCCURRED"),
+						HttpStatus.INTERNAL_SERVER_ERROR));
 		ReviewController controller = new ReviewController(reviewService);
 		controller.getReviewsForProduct("abc123", null);
 	}
@@ -83,8 +84,8 @@ public class ReviewControllerTest {
 	@Test(expected = ReviewableException.class)
 	public void testAddReviewsErrorScenario() throws Exception {
 		ReviewService reviewService = mock(ReviewService.class);
-		when(reviewService.addReview(any(Review.class)))
-				.thenThrow(new ReviewableException(new ReviewableError("ERROR1", "ERROR_OCCURRED")));
+		when(reviewService.addReview(any(Review.class))).thenThrow(new ReviewableException(
+				new ReviewableError("ERROR1", "ERROR_OCCURRED"), HttpStatus.INTERNAL_SERVER_ERROR));
 		ReviewController controller = new ReviewController(reviewService);
 		controller.addReview(new Review());
 	}

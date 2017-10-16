@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import com.craft.reviewable.domain.Product;
@@ -61,7 +62,7 @@ public class ReviewServiceImpl implements ReviewService {
 			ReviewableError error = new ReviewableError();
 			error.setErrorCode("R-4002");
 			error.setErrorDescription("Reviews for Product with the given product ID is not found");
-			ReviewableException ex = new ReviewableException(error);
+			ReviewableException ex = new ReviewableException(error, HttpStatus.NOT_FOUND);
 			LOGGER.debug("Exception stacktrace: {}", ex);
 			throw ex;
 		}
@@ -87,7 +88,7 @@ public class ReviewServiceImpl implements ReviewService {
 			ReviewableError error = new ReviewableError();
 			error.setErrorCode("R-4001");
 			error.setErrorDescription("Product ID entered is invalid. Review not added");
-			ReviewableException ex = new ReviewableException(error);
+			ReviewableException ex = new ReviewableException(error, HttpStatus.NOT_FOUND);
 			LOGGER.debug("Exception stacktrace: {}", ex);
 			throw ex;
 		}

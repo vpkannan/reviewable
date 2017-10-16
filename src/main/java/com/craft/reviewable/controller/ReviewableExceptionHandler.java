@@ -18,10 +18,10 @@ import com.craft.reviewable.exception.ReviewableException;
 @ControllerAdvice
 @EnableWebMvc
 @Order(Ordered.LOWEST_PRECEDENCE)
-public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
+public class ReviewableExceptionHandler extends ResponseEntityExceptionHandler {
 
 	public static final Logger LOGGER = LoggerFactory
-			.getLogger(com.craft.reviewable.controller.ControllerExceptionHandler.class);
+			.getLogger(com.craft.reviewable.controller.ReviewableExceptionHandler.class);
 
 	/**
 	 * Exception handler for the ReviewableException thrown by REST API
@@ -35,7 +35,18 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<ReviewableError> handleReviewableBadRequestException(final ReviewableException ex) {
 		LOGGER.info("ControllerAdvice returning error message to user");
 		LOGGER.debug("Error returned: {}", ex.getError());
-		return new ResponseEntity<>(ex.getError(), HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(ex.getError(), ex.getHttpStatus());
+	}
+
+	@ExceptionHandler(Exception.class)
+	@ResponseBody
+	public ResponseEntity<ReviewableError> handleException(final Exception ex) {
+		LOGGER.info("ControllerAdvice returning error message to user");
+		LOGGER.debug("Exception details: {}", ex);
+		String cause = (ex.getMessage() == null) ? "Internal Server Error. Please contact admin for more details"
+				: ex.getMessage();
+		ReviewableError error = new ReviewableError("", cause);
+		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 }

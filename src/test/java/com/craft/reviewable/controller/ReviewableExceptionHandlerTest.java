@@ -9,17 +9,17 @@ import org.springframework.http.ResponseEntity;
 import com.craft.reviewable.domain.error.ReviewableError;
 import com.craft.reviewable.exception.ReviewableException;
 
-public class ControllerExceptionHandlerTest {
+public class ReviewableExceptionHandlerTest {
 
 	@Test
 	public void testHandleReviewableExceptionHandler() {
-		ControllerExceptionHandler handler = new ControllerExceptionHandler();
-		ResponseEntity<ReviewableError> error = handler.handleReviewableBadRequestException(
-				new ReviewableException(new ReviewableError("ERROR1", "FATAL_ERROR")));
+		ReviewableExceptionHandler handler = new ReviewableExceptionHandler();
+		ResponseEntity<ReviewableError> error = handler.handleReviewableBadRequestException(new ReviewableException(
+				new ReviewableError("ERROR1", "FATAL_ERROR"), HttpStatus.INTERNAL_SERVER_ERROR));
 
 		assertEquals(error.getBody().getErrorCode(), "ERROR1");
 		assertEquals(error.getBody().getErrorDescription(), "FATAL_ERROR");
-		assertEquals(error.getStatusCode(), HttpStatus.NOT_FOUND);
+		assertEquals(error.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
 

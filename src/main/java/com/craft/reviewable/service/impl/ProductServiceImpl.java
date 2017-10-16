@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import com.craft.reviewable.domain.Product;
@@ -53,7 +54,7 @@ public class ProductServiceImpl implements ProductService {
 			ReviewableError error = new ReviewableError();
 			error.setErrorCode("R-4004");
 			error.setErrorDescription("No Products present in the system");
-			ReviewableException ex = new ReviewableException(error);
+			ReviewableException ex = new ReviewableException(error, HttpStatus.NOT_FOUND);
 			LOGGER.debug("Exception stacktrace: {}", ex);
 			throw ex;
 		}
@@ -75,7 +76,7 @@ public class ProductServiceImpl implements ProductService {
 			ReviewableError error = new ReviewableError();
 			error.setErrorCode("R-4001");
 			error.setErrorDescription("Could not fetch product details. Product ID entered is invalid");
-			ReviewableException ex = new ReviewableException(error);
+			ReviewableException ex = new ReviewableException(error, HttpStatus.NOT_FOUND);
 			LOGGER.debug("Exception stacktrace: {}", ex);
 			throw ex;
 		}
