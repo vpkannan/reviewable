@@ -17,25 +17,42 @@ Product also contains the average product rating based on the reviews. The updat
 
 REST API documentation can be found in the Swagger definition in src/main/resources/api/reviewable.yaml
 
-Build and Deploy
+## Using the Reviewable Application
 
 Docker is used to containerize the Reviewable application and so, build and deploy are straightforward. 
 
 IMPORTANT: These steps assume that Docker and Docker-compose are installed on your environment. 
- - If you do not have Docker installed, follow the instructions these instructions to install Docker -https://docs.docker.com/engine/installation/
- - Follow these instructions to install docker-compose - https://docs.docker.com/compose/install/
+ - If you do not have Docker installed, follow the instructions these instructions to install Docker - [Docker Installation Guide](https://docs.docker.com/engine/installation)
+ - Follow these instructions to install docker-compose - [Docker-compose Installation Guide](https://docs.docker.com/compose/install)
+
+
+
+You can choose one of the two options to spin up the application in your local environment. 
+ 1. Pull Images from Docker Hub
+ 2. Build and Deploy
+
+Let's see how each method can be done.
+
+#### 1. Pull Images from Docker Hub
+
+The project contains a docker-compose file to directly pull images that are published to the Docker Hub and deploy it on your local environment. This can be done with a simple step
+
+`docker-compose -f docker-compose-aws.yml up -d`
+
+
+#### Build and Deploy
 
 1. Clone the GIT project to your environment.
-    git clone git@github.com:vpkannan/reviewable.git
+    `git clone git@github.com:vpkannan/reviewable.git`
 
 2. (Optional step) Get into the reviewable project root directory and build the project
-    ./gradlew build
+    `./gradlew build`
     
 3. Create the docker container based on the dockerfile
-    ./gradlew buildDocker
+    `./gradlew buildDocker`
     
 4. Deploy the project
-    docker-compose up -d
+    `docker-compose up -d`
     
 
 
