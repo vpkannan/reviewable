@@ -8,14 +8,14 @@ Product Review Engine
 Reviewable is a Product Review Engine constructed using Spring Boot framework. It is containerized in Docker and uses docker-compose for deployment. MongoDB is used for data persistence. 
 
 Reviewable exposes REST API to 
- - Create a Product
- - Add Reviews to the Product
- - Retrieve details of a Product
- - Retrieve the reviews for a given Product
+ - Create a Product ( *POST /v1.0/product* )
+ - Add Reviews to the Product ( *POST /v1.0/review* )
+ - Retrieve details of a Product ( *GET /v1.0/product/{id}* )
+ - Retrieve the reviews for a given Product ( *GET /v1.0/review/{id}[?page=0&size=8&sort=date,desc*] )
  
 Product also contains the average product rating based on the reviews. The updated average product rating is computed as and when Reviews are added.
 
-REST API documentation can be found in the Swagger definition in [reviewable.yaml](https://github.com/vpkannan/reviewable/blob/master/src/main/resources/api/reviewable.yaml) file.
+A detailed REST API documentation can be found in the Swagger definition in [reviewable.yaml](https://github.com/vpkannan/reviewable/blob/master/src/main/resources/api/reviewable.yaml) file.
 
 ## Technologies Used
 
