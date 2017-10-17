@@ -29,7 +29,7 @@ IMPORTANT: These steps assume that Docker and Docker-compose are installed on yo
 
 You can choose one of the two options to spin up the application in your local environment. 
  1. Pull Images from Docker Hub
- 2. Build and Deploy
+ 2. Clone, Build and Deploy
 
 Let's see how each method can be done.
 
@@ -39,21 +39,30 @@ The project contains a docker-compose file to directly pull images that are publ
 
 `docker-compose -f docker-compose-aws.yml up -d`
 
+This will pull both Reviewable and MongoDB images and deploy them as Docker containers in your environment.
 
-#### Build and Deploy
+#### Clone, Build and Deploy
+
+The alternate approach is to clone the code from GIT, build and deploy it in your environment.
+
+Follow these steps to clone, build and deploy.
 
 1. Clone the GIT project to your environment.
+    
     `git clone git@github.com:vpkannan/reviewable.git`
 
 2. (Optional step) Get into the reviewable project root directory and build the project
+    
     `./gradlew build`
     
 3. Create the docker container based on the dockerfile
+    
     `./gradlew buildDocker`
     
 4. Deploy the project
+    
     `docker-compose up -d`
     
-
+This pull MongoDB and deploys it along with the Reviewable image we just built. 
 
 
