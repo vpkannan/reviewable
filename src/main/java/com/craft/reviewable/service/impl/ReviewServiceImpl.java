@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import com.craft.reviewable.domain.Product;
@@ -16,6 +17,7 @@ import com.craft.reviewable.exception.ReviewableException;
 import com.craft.reviewable.repository.ProductRepository;
 import com.craft.reviewable.repository.ReviewRepository;
 import com.craft.reviewable.service.ReviewService;
+import com.craft.reviewable.util.Constants;
 
 @Component
 public class ReviewServiceImpl implements ReviewService {
@@ -59,9 +61,9 @@ public class ReviewServiceImpl implements ReviewService {
 			LOGGER.info("Reviews for Product with the given product ID is not found in DB");
 			LOGGER.info("Throwing a customized error message");
 			ReviewableError error = new ReviewableError();
-			error.setErrorCode("R-4002");
+			error.setErrorCode(Constants.RE_REVIEW_NOT_FOUND);
 			error.setErrorDescription("Reviews for Product with the given product ID is not found");
-			ReviewableException ex = new ReviewableException(error);
+			ReviewableException ex = new ReviewableException(error, HttpStatus.NOT_FOUND);
 			LOGGER.debug("Exception stacktrace: {}", ex);
 			throw ex;
 		}
@@ -85,9 +87,9 @@ public class ReviewServiceImpl implements ReviewService {
 			LOGGER.info("Product with the given product ID is not found in DB. Review will not be added");
 			LOGGER.info("Throwing a customized error message");
 			ReviewableError error = new ReviewableError();
-			error.setErrorCode("R-4001");
+			error.setErrorCode(Constants.RE_PRODUCT_NOT_FOUND);
 			error.setErrorDescription("Product ID entered is invalid. Review not added");
-			ReviewableException ex = new ReviewableException(error);
+			ReviewableException ex = new ReviewableException(error, HttpStatus.NOT_FOUND);
 			LOGGER.debug("Exception stacktrace: {}", ex);
 			throw ex;
 		}

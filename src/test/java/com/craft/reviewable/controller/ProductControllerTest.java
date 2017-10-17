@@ -75,8 +75,8 @@ public class ProductControllerTest {
 	@Test(expected = ReviewableException.class)
 	public void testGetAllProductsErrorScenario() throws Exception {
 		ProductService productService = mock(ProductService.class);
-		when(productService.getAllProducts())
-				.thenThrow(new ReviewableException(new ReviewableError("ERROR1", "ERROR_OCCURRED")));
+		when(productService.getAllProducts()).thenThrow(new ReviewableException(
+				new ReviewableError("ERROR1", "ERROR_OCCURRED"), HttpStatus.INTERNAL_SERVER_ERROR));
 		ProductController controller = new ProductController(productService);
 		controller.getAllProducts();
 	}
@@ -84,8 +84,8 @@ public class ProductControllerTest {
 	@Test(expected = ReviewableException.class)
 	public void testGetProductByIdErrorScenario() throws Exception {
 		ProductService productService = mock(ProductService.class);
-		when(productService.getProductById("prod1"))
-				.thenThrow(new ReviewableException(new ReviewableError("ERROR1", "ERROR_OCCURRED")));
+		when(productService.getProductById("prod1")).thenThrow(new ReviewableException(
+				new ReviewableError("ERROR1", "ERROR_OCCURRED"), HttpStatus.INTERNAL_SERVER_ERROR));
 		ProductController controller = new ProductController(productService);
 		controller.getProductById("prod1");
 

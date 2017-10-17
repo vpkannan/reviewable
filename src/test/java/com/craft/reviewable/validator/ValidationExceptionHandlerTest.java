@@ -23,9 +23,10 @@ public class ValidationExceptionHandlerTest {
 		errors.add(new ObjectError("review", new String[] { "ERROR1" }, null, "FATAL_ERROR"));
 		BindingResult bindingResult = new BeanPropertyBindingResult(errors, "errors");
 		MethodArgumentNotValidException ex = new MethodArgumentNotValidException(null, bindingResult);
-		ResponseEntity<Object> error = handler.handleMethodArgumentNotValid(ex, null, HttpStatus.BAD_REQUEST, null);
+		ResponseEntity<Object> error = handler.handleMethodArgumentNotValid(ex, null, HttpStatus.INTERNAL_SERVER_ERROR,
+				null);
 
-		assertEquals(error.getStatusCode(), HttpStatus.BAD_REQUEST);
+		assertEquals(error.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
 
