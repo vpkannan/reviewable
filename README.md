@@ -28,7 +28,7 @@ REST API documentation can be found in the Swagger definition in [reviewable.yam
  - Containerization - Docker
  - Deploy - Docker-compose
  - CI/CD - Jenkins
- - Quality Gate - Sonarqube
+ - Continuous Code Quality - Sonarqube
  - Code Coverage - Jacoco
  - Source Control - GIT
  - Docker Repository - Docker Hub
