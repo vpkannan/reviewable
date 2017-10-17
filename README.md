@@ -17,6 +17,20 @@ Product also contains the average product rating based on the reviews. The updat
 
 REST API documentation can be found in the Swagger definition in [reviewable.yaml](https://github.com/vpkannan/reviewable/blob/master/src/main/resources/api/reviewable.yaml) file.
 
+## Technologies Used
+
+ - Language used: Java
+ - Framework - SpringBoot
+ - Unit Testing - JUnit
+ - Build - Gradle
+ - REST API - Spring
+ - Persistence - MongoDB
+ - CI/CD - Jenkins
+ - Quality Gate - Sonarqube
+ - Code Coverage - Jacoco
+ - Source Control - GIT
+ 
+
 ## Using the Reviewable Application
 
 Docker is used to containerize the Reviewable application. 
