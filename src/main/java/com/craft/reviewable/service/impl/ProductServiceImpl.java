@@ -13,6 +13,7 @@ import com.craft.reviewable.domain.error.ReviewableError;
 import com.craft.reviewable.exception.ReviewableException;
 import com.craft.reviewable.repository.ProductRepository;
 import com.craft.reviewable.service.ProductService;
+import com.craft.reviewable.util.Constants;
 
 /**
  * @author Vignesh
@@ -52,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
 			LOGGER.info("No Products found in DB");
 			LOGGER.info("Returning a customized error response");
 			ReviewableError error = new ReviewableError();
-			error.setErrorCode("R-4004");
+			error.setErrorCode(Constants.RE_PRODUCT_NOT_FOUND);
 			error.setErrorDescription("No Products present in the system");
 			ReviewableException ex = new ReviewableException(error, HttpStatus.NOT_FOUND);
 			LOGGER.debug("Exception stacktrace: {}", ex);
@@ -74,7 +75,7 @@ public class ProductServiceImpl implements ProductService {
 			LOGGER.info("Product with the given product ID is not found in DB");
 			LOGGER.info("Throwing a customized error message");
 			ReviewableError error = new ReviewableError();
-			error.setErrorCode("R-4001");
+			error.setErrorCode(Constants.RE_PRODUCT_NOT_FOUND);
 			error.setErrorDescription("Could not fetch product details. Product ID entered is invalid");
 			ReviewableException ex = new ReviewableException(error, HttpStatus.NOT_FOUND);
 			LOGGER.debug("Exception stacktrace: {}", ex);

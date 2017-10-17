@@ -31,7 +31,7 @@ import com.craft.reviewable.domain.error.ReviewableError;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class ValidationExceptionHandler extends ResponseEntityExceptionHandler {
 
-	public static final Logger LOGGER = LoggerFactory
+	public static final Logger SYS_LOGGER = LoggerFactory
 			.getLogger(com.craft.reviewable.validator.ValidationExceptionHandler.class);
 
 	/**
@@ -40,6 +40,9 @@ public class ValidationExceptionHandler extends ResponseEntityExceptionHandler {
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
+		SYS_LOGGER.info("Validation errors found in the incoming request");
+		SYS_LOGGER.info("ControllerAdvice returning error message to user");
+		
 		List<ObjectError> errors = ex.getBindingResult().getAllErrors();
 
 		List<ReviewableError> reviewableErrors = new ArrayList<>();

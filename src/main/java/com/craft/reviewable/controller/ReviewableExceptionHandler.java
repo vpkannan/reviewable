@@ -20,7 +20,7 @@ import com.craft.reviewable.exception.ReviewableException;
 @Order(Ordered.LOWEST_PRECEDENCE)
 public class ReviewableExceptionHandler extends ResponseEntityExceptionHandler {
 
-	public static final Logger LOGGER = LoggerFactory
+	public static final Logger SYS_LOGGER = LoggerFactory
 			.getLogger(com.craft.reviewable.controller.ReviewableExceptionHandler.class);
 
 	/**
@@ -33,16 +33,16 @@ public class ReviewableExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(ReviewableException.class)
 	@ResponseBody
 	public ResponseEntity<ReviewableError> handleReviewableBadRequestException(final ReviewableException ex) {
-		LOGGER.info("ControllerAdvice returning error message to user");
-		LOGGER.debug("Error returned: {}", ex.getError());
+		SYS_LOGGER.info("ControllerAdvice returning error message to user");
+		SYS_LOGGER.debug("Error returned: {}", ex.getError());
 		return new ResponseEntity<>(ex.getError(), ex.getHttpStatus());
 	}
 
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
 	public ResponseEntity<ReviewableError> handleException(final Exception ex) {
-		LOGGER.info("ControllerAdvice returning error message to user");
-		LOGGER.debug("Exception details: {}", ex);
+		SYS_LOGGER.info("ControllerAdvice returning error message to user");
+		SYS_LOGGER.debug("Exception details: {}", ex);
 		String cause = (ex.getMessage() == null) ? "Internal Server Error. Please contact admin for more details"
 				: ex.getMessage();
 		ReviewableError error = new ReviewableError("", cause);
