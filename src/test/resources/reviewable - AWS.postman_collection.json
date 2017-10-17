@@ -1,0 +1,121 @@
+{
+	"variables": [],
+	"info": {
+		"name": "reviewable - AWS",
+		"_postman_id": "799f0940-4349-90eb-572b-a9ccebad069a",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Product",
+			"request": {
+				"url": "http://ec2-34-215-128-136.us-west-2.compute.amazonaws.com:9001/v1.0/product",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Turbotax\"\n}\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Add Review to Product",
+			"request": {
+				"url": "http://ec2-34-215-128-136.us-west-2.compute.amazonaws.com:9001/v1.0/review",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"productId\": \"59e5a614a7b11b0005aa1300\",\n\t\"rating\": 5,\n\t\"reviewTitle\": \"Good product\",\n\t\"reviewText\": \"Makes my taxes easy\",\n\t\"userName\": \"vpkannan\"\n}\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Reviews for a Product - Pageable",
+			"request": {
+				"url": {
+					"raw": "http://ec2-34-215-128-136.us-west-2.compute.amazonaws.com:9001/v1.0/review/59e5a614a7b11b0005aa1300?page=0&size=8&sort=date,desc",
+					"protocol": "http",
+					"host": [
+						"ec2-34-215-128-136",
+						"us-west-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "9001",
+					"path": [
+						"v1.0",
+						"review",
+						"59e5a614a7b11b0005aa1300"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "size",
+							"value": "8",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "sort",
+							"value": "date,desc",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product Details",
+			"request": {
+				"url": "http://ec2-34-215-128-136.us-west-2.compute.amazonaws.com:9001/v1.0/product/59e5754ba7b11b00052e5372",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Products",
+			"request": {
+				"url": "http://ec2-34-215-128-136.us-west-2.compute.amazonaws.com:9001/v1.0/product/all",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
