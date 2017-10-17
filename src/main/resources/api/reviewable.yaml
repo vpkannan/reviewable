@@ -164,49 +164,66 @@ definitions:
     properties:
       id:
         type: string
+        description: The unique ID for the Product
       name:
         type: string
+        description: Name of the Product
       averageRating:
         type: number
         format: double
+        description: Average rating of the product based on reviews
       oneStar:
         type: integer
         format: int32
+        description: Number of one star reviews
       twoStar:
         type: integer
         format: int32
+        description: Number of two star reviews
       threeStar:
         type: integer
         format: int32
+        description: Number of three star reviews
       fourStar:
         type: integer
         format: int32
+        description: Number of four star reviews
       fiveStar:
         type: integer
         format: int32
+        description: Number of five star reviews
   Review:
     type: object
     properties:
       id:
         type: string
+        description: The unique ID of the Review
       productId:
         type: string
+        description: The ID of the Product to which the Review belongs
       rating:
         type: integer
         format: int32
+        description: The star rating for the Review. Range is from 1 to 5
       reviewTitle:
         type: string
+        description: A title for the Review
       reviewText:
         type: string
+        description: A detailed description for the Review
       userName:
         type: string
+        description: Name of the User submitting the Review
       date:
         type: string
         format: date-time
+        description: Date and Time when the Review was created
   ReviewableError:
     type: object
     properties:
       errorCode:
         type: string
+        description: An error code to uniquely identify the error
       errorDescription:
         type: string
+        description: A descriptive error message for the error
