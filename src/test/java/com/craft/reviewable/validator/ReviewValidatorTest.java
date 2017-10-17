@@ -10,6 +10,9 @@ import com.craft.reviewable.domain.Review;
 
 public class ReviewValidatorTest {
 
+	/**
+	 * Test: ReviewValidator supports method
+	 */
 	@Test
 	public void testSupports() {
 
@@ -17,6 +20,9 @@ public class ReviewValidatorTest {
 		assert (result);
 	}
 
+	/**
+	 * Test: validate Review method
+	 */
 	@Test
 	public void testValidate() {
 

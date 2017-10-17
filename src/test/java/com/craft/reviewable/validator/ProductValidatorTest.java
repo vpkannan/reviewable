@@ -8,6 +8,9 @@ import com.craft.reviewable.domain.Product;
 
 public class ProductValidatorTest {
 
+	/**
+	 * Test: ProductValidator supports method
+	 */
 	@Test
 	public void testSupports() {
 
@@ -15,6 +18,9 @@ public class ProductValidatorTest {
 		assert (result);
 	}
 
+	/**
+	 * Test: Product validate method 
+	 */
 	@Test
 	public void testValidate() {
 

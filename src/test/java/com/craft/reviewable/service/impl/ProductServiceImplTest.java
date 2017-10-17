@@ -17,6 +17,12 @@ import com.craft.reviewable.repository.ProductRepository;
 import com.craft.reviewable.service.ProductService;
 
 public class ProductServiceImplTest {
+
+	/**
+	 * Test: Service method to get all Products
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testGetAllProducts() throws Exception {
 		ProductRepository productRepository = mock(ProductRepository.class);
@@ -29,6 +35,11 @@ public class ProductServiceImplTest {
 		assertEquals(retrievedProducts.size(), 2);
 	}
 
+	/**
+	 * Test: Service method to get Product by ID
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testGetProductById() throws Exception {
 		ProductRepository productRepository = mock(ProductRepository.class);
@@ -42,6 +53,11 @@ public class ProductServiceImplTest {
 		assertEquals(retrievedProduct.getName(), "IPhone 8");
 	}
 
+	/**
+	 * Test: Service method to create Product
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testCreateProduct() throws Exception {
 		ProductRepository productRepository = mock(ProductRepository.class);
@@ -57,6 +73,11 @@ public class ProductServiceImplTest {
 		assertEquals(createdProduct.getName(), product.getName());
 	}
 
+	/**
+	 * Test: Service method to get all Products - Error scenario
+	 * 
+	 * @throws Exception
+	 */
 	@Test(expected = ReviewableException.class)
 	public void testGetAllProductsErrorScenario() throws Exception {
 		ProductRepository productRepository = mock(ProductRepository.class);
@@ -66,6 +87,11 @@ public class ProductServiceImplTest {
 		productService.getAllProducts();
 	}
 
+	/**
+	 * Test: Service method to get Product by ID - Error scenario
+	 * 
+	 * @throws Exception
+	 */
 	@Test(expected = ReviewableException.class)
 	public void testGetProductByIdErrorScenario() throws Exception {
 		ProductRepository productRepository = mock(ProductRepository.class);

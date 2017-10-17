@@ -11,6 +11,9 @@ import com.craft.reviewable.exception.ReviewableException;
 
 public class ReviewableExceptionHandlerTest {
 
+	/**
+	 * Test: Method to handle ReviewableException
+	 */
 	@Test
 	public void testHandleReviewableExceptionHandler() {
 		ReviewableExceptionHandler handler = new ReviewableExceptionHandler();
@@ -22,6 +25,9 @@ public class ReviewableExceptionHandlerTest {
 		assertEquals(error.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	/**
+	 * Test: Method to handle other Exception types
+	 */
 	@Test
 	public void testHandleExceptionHandler() {
 		ReviewableExceptionHandler handler = new ReviewableExceptionHandler();

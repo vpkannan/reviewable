@@ -5,6 +5,12 @@ import java.util.List;
 import com.craft.reviewable.domain.Product;
 import com.craft.reviewable.exception.ReviewableException;
 
+/**
+ * Service layer for Product API
+ * 
+ * @author Vignesh
+ *
+ */
 public interface ProductService {
 
 	/**

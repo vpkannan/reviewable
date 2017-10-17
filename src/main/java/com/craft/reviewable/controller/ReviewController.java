@@ -26,6 +26,8 @@ import com.craft.reviewable.service.ReviewService;
 import com.craft.reviewable.validator.ReviewValidator;
 
 /**
+ * Represents the REST API for the Review resource
+ * 
  * @author Vignesh
  *
  */

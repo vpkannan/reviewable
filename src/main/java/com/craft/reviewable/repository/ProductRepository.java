@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import com.craft.reviewable.domain.Product;
 
 /**
+ * Repository for Product entity
+ * 
  * @author Vignesh
  *
  */

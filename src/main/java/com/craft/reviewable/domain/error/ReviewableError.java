@@ -1,5 +1,11 @@
 package com.craft.reviewable.domain.error;
 
+/**
+ * Customized error entity returned by Reviewable application in error scenarios
+ * 
+ * @author Vignesh
+ *
+ */
 public class ReviewableError {
 
 	private String errorCode;

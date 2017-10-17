@@ -7,6 +7,12 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+/**
+ * The Product entity
+ * 
+ * @author Vignesh
+ *
+ */
 @Entity
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Product {

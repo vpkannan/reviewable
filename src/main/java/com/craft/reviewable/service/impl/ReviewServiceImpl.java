@@ -19,6 +19,12 @@ import com.craft.reviewable.repository.ReviewRepository;
 import com.craft.reviewable.service.ReviewService;
 import com.craft.reviewable.util.Constants;
 
+/**
+ * Implementation for ReviewService
+ * 
+ * @author Vignesh
+ *
+ */
 @Component
 public class ReviewServiceImpl implements ReviewService {
 
