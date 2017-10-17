@@ -17,6 +17,23 @@ Product also contains the average product rating based on the reviews. The updat
 
 REST API documentation can be found in the Swagger definition in [reviewable.yaml](https://github.com/vpkannan/reviewable/blob/master/src/main/resources/api/reviewable.yaml) file.
 
+## Technologies Used
+
+ - Language used: Java
+ - Framework - SpringBoot
+ - Unit Testing - JUnit
+ - Build - Gradle
+ - REST API - Spring
+ - Persistence - MongoDB
+ - Containerization - Docker
+ - Deploy - Docker-compose
+ - CI/CD - Jenkins
+ - Quality Gate - Sonarqube
+ - Code Coverage - Jacoco
+ - Source Control - GIT
+ - Docker Repository - Docker Hub
+ 
+
 ## Using the Reviewable Application
 
 Docker is used to containerize the Reviewable application. 
@@ -39,7 +56,7 @@ Let's see how each method can be done.
 
 The project contains a docker-compose-prod.yml file which lets us to directly pull the project's images published to the Docker Hub and deploy it on your local environment. This can be done with a simple step
 
-`docker-compose -f docker-compose-aws.yml up -d`
+`docker-compose -f docker-compose-prod.yml up -d`
 
 This will pull both *vpkannan/reviewable* and *mongo* images and deploy them as Docker containers in your environment.
 
