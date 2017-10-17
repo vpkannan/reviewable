@@ -11,7 +11,7 @@ Reviewable exposes REST API to
  - Create a Product ( *POST /v1.0/product* )
  - Add Reviews to the Product ( *POST /v1.0/review* )
  - Retrieve details of a Product ( *GET /v1.0/product/{id}* )
- - Retrieve the reviews for a given Product ( *GET /v1.0/review/{id}[?page=0&size=8&sort=date,desc*] )
+ - Retrieve the reviews for a given Product ( *GET /v1.0/review/{id}[?page=0&size=8&sort=date,desc]* )
  
 Product also contains the average product rating based on the reviews. The updated average product rating is computed as and when Reviews are added.
 
