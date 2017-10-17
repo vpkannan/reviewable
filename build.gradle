@@ -43,10 +43,9 @@ task buildDocker(type: Docker, dependsOn: build) {
 }
 
 task publishImage (dependsOn: buildDocker) {
-	String registryUrl = "registry.hub.docker.com"
 	String appName = "vpkannan/reviewable"
 	
-	String latestImage = registryUrl + "/" + appName + ":latest"
+	String latestImage = appName + ":latest"
 	doFirst { 
 		exec {
 			executable 'docker'
