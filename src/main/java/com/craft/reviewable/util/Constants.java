@@ -8,6 +8,10 @@ package com.craft.reviewable.util;
  */
 public class Constants {
 
+	private Constants() {
+		super();
+	}
+
 	// Error code: Product not found in database
 	public static final String RE_PRODUCT_NOT_FOUND = "R-4401";
 
