@@ -56,7 +56,7 @@ Let's see how each method can be done.
 
 The project contains a docker-compose-prod.yml file which lets us to directly pull the project's images published to the Docker Hub and deploy it on your local environment. This can be done with a simple step
 
-`docker-compose -f docker-compose-aws.yml up -d`
+`docker-compose -f docker-compose-prod.yml up -d`
 
 This will pull both *vpkannan/reviewable* and *mongo* images and deploy them as Docker containers in your environment.
 
