@@ -3,8 +3,6 @@ services:
 
   reviewable:
     image: vpkannan/reviewable
-    build:
-      context: build/docker
     ports:
     - 9001:8080
     links:
