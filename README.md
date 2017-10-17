@@ -25,10 +25,13 @@ REST API documentation can be found in the Swagger definition in [reviewable.yam
  - Build - Gradle
  - REST API - Spring
  - Persistence - MongoDB
+ - Containerization - Docker
+ - Deploy - Docker-compose
  - CI/CD - Jenkins
  - Quality Gate - Sonarqube
  - Code Coverage - Jacoco
  - Source Control - GIT
+ - Docker Repository - Docker Hub
  
 
 ## Using the Reviewable Application
