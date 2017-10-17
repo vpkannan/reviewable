@@ -18,6 +18,10 @@ import com.craft.reviewable.service.ProductService;
 
 public class ProductControllerTest {
 
+	/**
+	 * Test: Controller method to get all products
+	 * @throws Exception
+	 */
 	@Test
 	public void testGetAllProducts() throws Exception {
 		ProductService productService = mock(ProductService.class);
@@ -31,6 +35,10 @@ public class ProductControllerTest {
 		assertEquals(retrievedProducts.getStatusCode(), HttpStatus.OK);
 	}
 
+	/**
+	 * Test: Controller method to get Product by ID
+	 * @throws Exception
+	 */
 	@Test
 	public void testGetProductById() throws Exception {
 		ProductService productService = mock(ProductService.class);
@@ -57,6 +65,10 @@ public class ProductControllerTest {
 		assertEquals(retrievedProduct.getStatusCode(), HttpStatus.OK);
 	}
 
+	/**
+	 * Test: Controller method to create Product
+	 * @throws Exception
+	 */
 	@Test
 	public void testCreateProduct() throws Exception {
 		ProductService productService = mock(ProductService.class);

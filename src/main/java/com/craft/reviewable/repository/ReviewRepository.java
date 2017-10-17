@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import com.craft.reviewable.domain.Review;
 
 /**
+ * Repository for Review entity
+ * 
  * @author Vignesh
  *
  */

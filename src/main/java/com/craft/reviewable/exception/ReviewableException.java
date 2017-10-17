@@ -4,6 +4,13 @@ import org.springframework.http.HttpStatus;
 
 import com.craft.reviewable.domain.error.ReviewableError;
 
+/**
+ * Customized Exception that holds ReviewableError to throw appropriate error
+ * messages during error scenarios
+ * 
+ * @author Vignesh
+ *
+ */
 public class ReviewableException extends Exception {
 
 	private static final long serialVersionUID = 1L;

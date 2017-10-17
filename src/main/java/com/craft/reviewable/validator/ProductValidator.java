@@ -13,6 +13,8 @@ import com.craft.reviewable.domain.Product;
 import com.craft.reviewable.util.Constants;
 
 /**
+ * Spring validator for Product resource
+ * 
  * @author Vignesh
  *
  */

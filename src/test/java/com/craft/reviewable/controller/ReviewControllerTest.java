@@ -24,6 +24,11 @@ import com.craft.reviewable.service.ReviewService;
 
 public class ReviewControllerTest {
 
+	/**
+	 * Test: Controller method to get Reviews for Product based on Product ID
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testGetReviewsForProducts() throws Exception {
 		ReviewService reviewService = mock(ReviewService.class);
@@ -37,8 +42,13 @@ public class ReviewControllerTest {
 		assertEquals(retrievedReviews.getStatusCode(), HttpStatus.OK);
 	}
 
+	/**
+	 * Test: Controller method to add new Review to a Product
+	 * 
+	 * @throws Exception
+	 */
 	@Test
-	public void testAdddReview() throws Exception {
+	public void testAddReview() throws Exception {
 		ReviewService reviewService = mock(ReviewService.class);
 
 		Review mockedReview = new Review();
@@ -71,6 +81,11 @@ public class ReviewControllerTest {
 		assertEquals(addedReview.getStatusCode(), HttpStatus.CREATED);
 	}
 
+	/**
+	 * Test: Test error scenario for getReviews
+	 * 
+	 * @throws Exception
+	 */
 	@Test(expected = ReviewableException.class)
 	public void testGetReviewsForProductsErrorScenario() throws Exception {
 		ReviewService reviewService = mock(ReviewService.class);
@@ -81,6 +96,11 @@ public class ReviewControllerTest {
 		controller.getReviewsForProduct("abc123", null);
 	}
 
+	/**
+	 * Test: Test error scenario for add Review
+	 * 
+	 * @throws Exception
+	 */
 	@Test(expected = ReviewableException.class)
 	public void testAddReviewsErrorScenario() throws Exception {
 		ReviewService reviewService = mock(ReviewService.class);

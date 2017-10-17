@@ -15,6 +15,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.craft.reviewable.domain.error.ReviewableError;
 import com.craft.reviewable.exception.ReviewableException;
 
+/**
+ * Exception handler for REST API
+ */
 @ControllerAdvice
 @EnableWebMvc
 @Order(Ordered.LOWEST_PRECEDENCE)

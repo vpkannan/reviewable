@@ -13,6 +13,8 @@ import com.craft.reviewable.domain.Review;
 import com.craft.reviewable.util.Constants;
 
 /**
+ * Spring validator for Review resource
+ * 
  * @author Vignesh
  *
  */

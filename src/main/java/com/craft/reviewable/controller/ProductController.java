@@ -26,6 +26,8 @@ import com.craft.reviewable.service.ProductService;
 import com.craft.reviewable.validator.ProductValidator;
 
 /**
+ * Represents the REST API definitions for Product resource
+ * 
  * @author Vignesh
  *
  */

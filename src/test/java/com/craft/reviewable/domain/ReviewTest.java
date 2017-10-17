@@ -8,8 +8,13 @@ import java.util.Date;
 import org.junit.Test;
 
 public class ReviewTest {
+	/**
+	 * Test: Test Review equals and hashcode
+	 * 
+	 * @throws Exception
+	 */
 	@Test
-	public void testProductEquals() throws Exception {
+	public void testReviewEquals() throws Exception {
 
 		Date date = new Date();
 		Product p = new Product("prod1", "IPhone X", 3.0, 1, 1, 1, 1, 1);

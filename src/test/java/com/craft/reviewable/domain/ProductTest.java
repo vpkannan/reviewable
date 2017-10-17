@@ -7,6 +7,11 @@ import org.junit.Test;
 
 public class ProductTest {
 
+	/**
+	 * Test: Calculate average rating for a product - 5 star
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testCalculateAverageRating5() throws Exception {
 		Product product = new Product("prod1", "IPhone X", 3.0, 1, 1, 1, 1, 1);
@@ -22,6 +27,11 @@ public class ProductTest {
 		assertEquals(product.getFiveStar(), 2);
 	}
 
+	/**
+	 * Test: Calculate average rating for a product - 4 star
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testCalculateAverageRating4() throws Exception {
 		Product product = new Product("prod1", "IPhone X", 3.0, 1, 1, 1, 1, 1);
@@ -37,6 +47,11 @@ public class ProductTest {
 		assertEquals(product.getFiveStar(), 1);
 	}
 
+	/**
+	 * Test: Calculate average rating for a product - 3 star
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testCalculateAverageRating3() throws Exception {
 		Product product = new Product("prod1", "IPhone X", 3.0, 1, 1, 1, 1, 1);
@@ -52,6 +67,11 @@ public class ProductTest {
 		assertEquals(product.getFiveStar(), 1);
 	}
 
+	/**
+	 * Test: Calculate average rating for a product - 2 star
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testCalculateAverageRating2() throws Exception {
 		Product product = new Product("prod1", "IPhone X", 3.0, 1, 1, 1, 1, 1);
@@ -67,6 +87,11 @@ public class ProductTest {
 		assertEquals(product.getFiveStar(), 1);
 	}
 
+	/**
+	 * Test: Calculate average rating for a product - 1 star
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testCalculateAverageRating1() throws Exception {
 		Product product = new Product("prod1", "IPhone X", 3.0, 1, 1, 1, 1, 1);
@@ -82,6 +107,11 @@ public class ProductTest {
 		assertEquals(product.getFiveStar(), 1);
 	}
 
+	/**
+	 * Test: Test product equals and hashcode
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testProductEquals() throws Exception {
 		Product p1 = new Product("prod1", "IPhone X", 3.0, 1, 1, 1, 1, 1);

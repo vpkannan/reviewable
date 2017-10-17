@@ -23,6 +23,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.craft.reviewable.domain.error.ReviewableError;
 
 /**
+ * Exception handler for Validation errors
+ * 
  * @author Vignesh
  *
  */
@@ -42,7 +44,7 @@ public class ValidationExceptionHandler extends ResponseEntityExceptionHandler {
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		SYS_LOGGER.info("Validation errors found in the incoming request");
 		SYS_LOGGER.info("ControllerAdvice returning error message to user");
-		
+
 		List<ObjectError> errors = ex.getBindingResult().getAllErrors();
 
 		List<ReviewableError> reviewableErrors = new ArrayList<>();

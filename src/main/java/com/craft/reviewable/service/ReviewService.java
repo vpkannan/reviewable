@@ -11,6 +11,8 @@ import com.craft.reviewable.domain.Review;
 import com.craft.reviewable.exception.ReviewableException;
 
 /**
+ * Service layer for Review API
+ * 
  * @author Vignesh
  *
  */

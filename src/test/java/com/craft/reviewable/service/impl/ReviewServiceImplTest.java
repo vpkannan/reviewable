@@ -23,6 +23,12 @@ import com.craft.reviewable.repository.ReviewRepository;
 import com.craft.reviewable.service.ReviewService;
 
 public class ReviewServiceImplTest {
+
+	/**
+	 * Test: Service method to list all Reviews for a Product
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testListProductReviews() throws Exception {
 		ReviewRepository reviewRepository = mock(ReviewRepository.class);
@@ -43,6 +49,11 @@ public class ReviewServiceImplTest {
 		}
 	}
 
+	/**
+	 * Test: Service method to add Review
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testAddReview() throws Exception {
 		ReviewRepository reviewRepository = mock(ReviewRepository.class);
@@ -65,6 +76,11 @@ public class ReviewServiceImplTest {
 
 	}
 
+	/**
+	 * Test: Service method to list all Reviews for a Product - Error scenario
+	 * 
+	 * @throws Exception
+	 */
 	@Test(expected = ReviewableException.class)
 	public void testListProductReviewsForInvalidProduct() throws Exception {
 		ReviewRepository reviewRepository = mock(ReviewRepository.class);
@@ -78,6 +94,11 @@ public class ReviewServiceImplTest {
 		reviewService.listProductReviews("prod1", null);
 	}
 
+	/**
+	 * Test: Service method to add Review - Error scenario
+	 * 
+	 * @throws Exception
+	 */
 	@Test(expected = ReviewableException.class)
 	public void testAddReviewForInvalidProject() throws Exception {
 		ReviewRepository reviewRepository = mock(ReviewRepository.class);

@@ -15,6 +15,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 
 public class ValidationExceptionHandlerTest {
 
+	/**
+	 * Test: Validation exception handler
+	 */
 	@Test
 	public void testHandleReviewableExceptionHandler() {
 
