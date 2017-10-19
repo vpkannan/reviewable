@@ -22,7 +22,10 @@ services:
     ports:
     - "9200:9200"
     - "9300:9300"
-    mem_limit: 300M
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
     
   kibana:
     image: kibana
