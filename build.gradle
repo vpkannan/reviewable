@@ -68,7 +68,7 @@ dependencies {
     	"org.springframework.boot:spring-boot-starter-data-mongodb",
     	"commons-lang:commons-lang:2.2",
     	"javax.persistence:persistence-api:1.0",
-    	"net.logstash.logback:logstash-logback-encoder:4.11",
+    	"net.logstash.logback:logstash-logback-encoder:4.10",
     	"org.springframework.cloud:spring-cloud-starter-config:1.3.3.RELEASE",
     	"org.springframework.cloud:spring-cloud-starter-eureka:1.3.5.RELEASE",
     	"org.springframework.cloud:spring-cloud-starter-sleuth:1.2.5.RELEASE",
