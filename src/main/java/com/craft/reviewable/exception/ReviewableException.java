@@ -14,7 +14,7 @@ import com.craft.reviewable.domain.error.ReviewableError;
 public class ReviewableException extends Exception {
 
 	private static final long serialVersionUID = 1L;
-	private final ReviewableError error;
+	private transient final ReviewableError error;
 	private final HttpStatus httpStatus;
 
 	public ReviewableException(ReviewableError error, HttpStatus httpStatus) {
